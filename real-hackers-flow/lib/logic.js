@@ -6,16 +6,19 @@
  */
 function execValidation(validation) {
     // Save the old value of the asset.
-    var oldValue = validation.application;
+    var application = validation.application;
+    application.signatures.push(validation.signature);
+    if (application.signatures.length >= 3) {
+        application.applicationStatus = 3;
+    }
     // Update the asset with the new value.
-    //tx.asset.value = validation.newValue;
 
     // Get the asset registry for the asset.
     return getAssetRegistry('org.real.hackers.Application')
         .then(function (assetRegistry) {
 
             // Update the asset in the asset registry.
-            return assetRegistry.update(validation);
+            return assetRegistry.update(validation.application);
 
         })
         .then(function () {

@@ -6,17 +6,19 @@ namespace org.real.hackers
 asset Application identified by appId {
   o String appId
   --> Customer customer
-  o String value
+  o String creditHistory
   o String propertyName
-  o String fundingRequest
-  o Double applicationStatus
+  o Double fundingRequest
+  o Integer duration
+  o Signature[] signatures
+  o Integer applicationStatus
 }
 
 participant Customer identified by customerId {
   o String customerId
   o String firstName
   o String lastName
-  o String dateOfBirth
+  o DateTime dateOfBirth
 }
 
 participant Registrar identified by registrarId {
@@ -29,11 +31,14 @@ participant Bank identified by bankId {
   o String name
 }
 
-transaction Validation {
-  --> Application application
-  o Boolean valid
+concept Signature {
+  o DateTime theDate
+  o String name
+  o String handwriting
 }
 
-event ApplicationSend {
+transaction Validation {
   --> Application application
+  o Signature signature
 }
+  
