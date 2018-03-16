@@ -1,0 +1,9 @@
+/** Queries for Hacker Flow
+*/
+
+query selectBankApproved {
+  description: "Select Bank Approved"
+  statement:
+      SELECT org.real.hackers.Application
+        WHERE (applicationStatus == 1)
+}

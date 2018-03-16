@@ -1,7 +1,7 @@
 /**
  * Sample business network definition.
  */
-namespace org.acme.real
+namespace org.real.hackers
 
 asset Application identified by appId {
   o String appId
@@ -9,6 +9,7 @@ asset Application identified by appId {
   o String value
   o String propertyName
   o String fundingRequest
+  o Double applicationStatus
 }
 
 participant Customer identified by customerId {

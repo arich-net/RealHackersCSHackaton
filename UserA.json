@@ -1,0 +1,7 @@
+{
+  "$class": "org.real.hackers.Customer",
+  "customerId": "111111",
+  "firstName": "Jose",
+  "lastName": "Perez",
+  "dateOfBirth": "12/12/1970"
+}

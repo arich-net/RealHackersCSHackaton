@@ -4,7 +4,6 @@
  * @param {org.real.hackers.Validation} tx The sample transaction instance.
  * @transaction
  */
-
 function execValidation(validation) {
     // Save the old value of the asset.
     var oldValue = validation.application;
