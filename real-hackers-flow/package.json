@@ -1,0 +1,22 @@
+{
+  "name": "real-hackers-flow",
+  "version": "0.0.1",
+  "description": "Real Hackers Hackaton CS",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "author": "Ariel Vasquez",
+  "email": "ariel.vasquezmorales@credit-suisse.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "composer-admin": "latest",
+    "composer-client": "latest",
+    "composer-common": "latest",
+    "composer-connector-embedded": "latest",
+    "chai": "latest",
+    "eslint": "latest",
+    "istanbul": "latest",
+    "mkdirp": "latest",
+    "mocha": "latest"
+  }
+}
