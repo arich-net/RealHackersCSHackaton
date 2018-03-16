@@ -7,6 +7,8 @@ asset Application identified by appId {
   o String appId
   --> Customer customer
   o String value
+  o String propertyName
+  o String fundingRequest
 }
 
 participant Customer identified by customerId {
@@ -14,6 +16,11 @@ participant Customer identified by customerId {
   o String firstName
   o String lastName
   o String dateOfBirth
+}
+
+participant Registrar identified by registrarId {
+  o String registrarId
+  o String registrarName
 }
 
 participant Bank identified by bankId {

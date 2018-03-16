@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Sample transaction processor function.
- * @param {org.acme.real.Validation} tx The sample transaction instance.
+ * @param {org.real.hackers.Validation} tx The sample transaction instance.
  * @transaction
  */
 
@@ -12,7 +12,7 @@ function execValidation(validation) {
     //tx.asset.value = validation.newValue;
 
     // Get the asset registry for the asset.
-    return getAssetRegistry('org.acme.real.Application')
+    return getAssetRegistry('org.real.hackers.Application')
         .then(function (assetRegistry) {
 
             // Update the asset in the asset registry.
@@ -22,7 +22,7 @@ function execValidation(validation) {
         .then(function () {
 
             // Emit an event for the modified asset.
-            //var event = getFactory().newEvent('org.acme.real', 'ApplicationSend');
+            //var event = getFactory().newEvent('org.real.hackers', 'ApplicationSend');
             //event.asset = tx.asset;
             //event.oldValue = oldValue;
             //event.newValue = tx.newValue;
