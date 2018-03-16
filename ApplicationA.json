@@ -1,0 +1,9 @@
+{
+  "$class": "org.real.hackers.Application",
+  "appId": "app0001",
+  "customer": "org.real.hackers.Customer#111111",
+  "value": "45000",
+  "propertyName": "New Mansion Somewhere",
+  "fundingRequest": "30000",
+  "applicationStatus": 0
+}

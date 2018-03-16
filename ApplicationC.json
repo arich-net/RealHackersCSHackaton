@@ -1,0 +1,9 @@
+{
+  "$class": "org.real.hackers.Application",
+  "appId": "app0003",
+  "customer": "org.real.hackers.Customer#111112",
+  "value": "450000",
+  "propertyName": "New Mansion in Bolivia",
+  "fundingRequest": "300000",
+  "applicationStatus": 1
+}
