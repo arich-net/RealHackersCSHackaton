@@ -1,0 +1,12 @@
+{
+  "$class": "org.real.hackers.Validation",
+  "application": "org.real.hackers.Application#app0001",
+  "signature": {
+    "$class": "org.real.hackers.Signature",
+    "theDate": "2018-03-16T20:29:08.310Z",
+    "name": "BankB",
+    "handwriting": "728asasasasa891723yu",
+    "id": "validation0003"
+  },
+  "timestamp": "2018-03-16T20:29:08.310Z"
+}

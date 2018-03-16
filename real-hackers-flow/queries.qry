@@ -5,5 +5,5 @@ query selectBankApproved {
   description: "Select Bank Approved"
   statement:
       SELECT org.real.hackers.Application
-        WHERE (applicationStatus == 1)
+        WHERE (applicationStatus == 3)
 }
