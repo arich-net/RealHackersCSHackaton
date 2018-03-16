@@ -1,19 +1,31 @@
 /**
- * Write your model definitions here
+ * Sample business network definition.
  */
+namespace org.acme.real
 
-namespace org.real.hackers
-
-participant User identified by email {
-  o String email
-}
-
-asset SampleAsset identified by assetId {
-  o String assetId
+asset Application identified by appId {
+  o String appId
+  --> Customer customer
   o String value
 }
 
-transaction ChangeAssetValue {
-  o String newValue
-  --> Asset relatedAsset
+participant Customer identified by customerId {
+  o String customerId
+  o String firstName
+  o String lastName
+  o String dateOfBirth
+}
+
+participant Bank identified by bankId {
+  o String bankId
+  o String name
+}
+
+transaction Validation {
+  --> Application application
+  o Boolean valid
+}
+
+event ApplicationSend {
+  --> Application application
 }
