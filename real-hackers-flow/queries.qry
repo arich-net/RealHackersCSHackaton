@@ -14,3 +14,9 @@ query selectBankStatusZero {
       SELECT org.real.hackers.Application
         WHERE (applicationStatus == 0)
 }
+
+query selectBankStatusAll {
+  description: "Select AllBank Approved"
+  statement:
+      SELECT org.real.hackers.Application
+}

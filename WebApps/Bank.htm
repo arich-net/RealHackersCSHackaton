@@ -218,7 +218,7 @@
         };
 
         var xhr = new XMLHttpRequest();
-        var url = "http://localhost:3000/api/queries/selectBankStatusZero";
+        var url = "http://localhost:3000/api/queries/selectBankStatusAll";
 
         xhr.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
@@ -252,8 +252,8 @@
             }
           }
 
-          var col = ['appId', 'customer', 'propertyName', 'fundingRequest'];
-          var colNames = ['Applikation-Id', 'Customer-Id', 'property name', 'funding request'];
+          var col = ['appId', 'customer', 'propertyName', 'fundingRequest', 'applicationStatus'];
+          var colNames = ['Applikation-Id', 'Customer-Id', 'property name', 'funding request', 'application status'];
 
           var colNamesUi = ['Accept/Decline', 'Signed By', 'Signature'];
           var fields = ['<label class="checkContainer"><input type="checkbox"><span class="checkmark"></span></label>', '<input type="Text"></input>', '<input type="Text"></input>'];
