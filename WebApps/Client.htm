@@ -129,7 +129,15 @@
           <label for="loan">Loan request</label>
         </div>
         <div class="col-75">
-          <input type="text" id="loan" name="loan" placeholder="200.000 CHF">
+          <input type="text" id="loan" name="loan" type="number">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="address">Address</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="address" name="loan" placeholder="Uetlihof 13, Zuerich">
         </div>
       </div>
       <div class="row">
@@ -137,7 +145,7 @@
           <label for="loan">Credit history</label>
         </div>
         <div class="col-75">
-          <input type="file" id="credit" name="credit" placeholder="please select file">
+          <input type="file" id="credit" name="credit">
         </div>
       </div>
       <div class="row">
@@ -170,8 +178,8 @@
     user = {
       "$class": "org.real.hackers.Customer",
       "customerId": uniqid,
-      "firstName": "SomeName", //document.getElementById('fname').value,
-      "lastName": "SomeLastName", //document.getElementById('lname').value
+      "firstName": document.getElementById('fname').value,
+      "lastName": document.getElementById('lname').value,
       "dateOfBirth": "1979-03-16T20:17:54.264Z"
     }
     xhr.send(JSON.stringify(user));
@@ -184,11 +192,11 @@
       xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
       application = {
         "$class": "org.real.hackers.Application",
-        "appId": "app0003", // Auto generate ID
+        "appId": "app-" + uniqid, // Auto generate ID
         "customer": "org.real.hackers.Customer#" + uniqid,
         "creditHistory": "none",
-        "propertyName": "New Mansio Zurich",
-        "fundingRequest": 300000,
+        "propertyName": document.getElementById('address').value,
+        "fundingRequest": parseInt(document.getElementById('loan').value),
         "duration": 1,
         "signatures": [],
         "applicationStatus": 0

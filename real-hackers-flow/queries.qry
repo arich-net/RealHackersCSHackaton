@@ -7,3 +7,10 @@ query selectBankApproved {
       SELECT org.real.hackers.Application
         WHERE (applicationStatus == 3)
 }
+
+query selectBankStatusZero {
+  description: "Select Bank Approved"
+  statement:
+      SELECT org.real.hackers.Application
+        WHERE (applicationStatus == 0)
+}
