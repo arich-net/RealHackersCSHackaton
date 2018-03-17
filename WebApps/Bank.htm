@@ -220,76 +220,18 @@
               }
             }).addTo(mymap);
 
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:3000/api/queries/selectBankStatusZero";
 
-                       var applications = [
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app-C1521274973776",
-          "customer": "resource:org.real.hackers.Customer#C1521274973776",
-          "creditHistory": "none",
-          "propertyName": "New Mansio Zurich",
-          "fundingRequest": 300000,
-          "duration": 1,
-          "signatures": [],
-          "applicationStatus": 0
-        },
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app-J1521275135532",
-          "customer": "resource:org.real.hackers.Customer#J1521275135532",
-          "creditHistory": "none",
-          "propertyName": "New Mansio Zurich",
-          "fundingRequest": 300000,
-          "duration": 1,
-          "signatures": [],
-          "applicationStatus": 0
-        },
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app-U1521276453678",
-          "customer": "resource:org.real.hackers.Customer#U1521276453678",
-          "creditHistory": "none",
-          "propertyName": "Adliswil 22",
-          "fundingRequest": 20000000,
-          "duration": 1,
-          "signatures": [],
-          "applicationStatus": 0
-        },
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app-Y1521274411371",
-          "customer": "resource:org.real.hackers.Customer#Y1521274411371",
-          "creditHistory": "none",
-          "propertyName": "New Mansio Zurich",
-          "fundingRequest": 300000,
-          "duration": 1,
-          "signatures": [],
-          "applicationStatus": 0
-        },
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app0002",
-          "customer": "resource:org.real.hackers.Customer#111112",
-          "creditHistory": "none",
-          "propertyName": "New Mansio Zurich",
-          "fundingRequest": 300000,
-          "duration": 2,
-          "signatures": [],
-          "applicationStatus": 0
-        },
-        {
-          "$class": "org.real.hackers.Application",
-          "appId": "app0003",
-          "customer": "resource:org.real.hackers.Customer#D1521273857402",
-          "creditHistory": "none",
-          "propertyName": "New Mansio Zurich",
-          "fundingRequest": 300000,
-          "duration": 1,
-          "signatures": [],
-          "applicationStatus": 0
-        }
-      ]
-      
+            xhr.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                var applications = JSON.parse(this.responseText);
+                createTable(applications);
+              }
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
       
             function createTable(data) {
               var globalCounter = 0;

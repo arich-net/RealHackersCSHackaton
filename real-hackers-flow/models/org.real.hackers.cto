@@ -10,7 +10,7 @@ asset Application identified by appId {
   o String propertyName
   o Double fundingRequest
   o Integer duration
-  o Signature[] signatures
+  o Signature[] signatures optional
   o Integer applicationStatus
 }
 

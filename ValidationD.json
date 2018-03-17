@@ -1,0 +1,10 @@
+{
+  "$class": "org.real.hackers.Validation",
+  "application": "org.real.hackers.Application#app-C1521274973776",
+  "signature": {
+    "$class": "org.real.hackers.Signature",
+    "theDate": "2018-03-16T20:29:08.310Z",
+    "name": "Bank Real de Mallorca",
+    "handwriting": "yuyuyusagsjab676"
+  }
+}
