@@ -166,28 +166,35 @@
     var url = "http://localhost:3000/api/Customer";
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.setRequestHeader('Accept', 'application/json');
     user = {
       "$class": "org.real.hackers.Customer",
       "customerId": uniqid,
-      "firstName": document.getElementById('fname').value,
-      "lastName": document.getElementById('lname').value
+      "firstName": "SomeName", //document.getElementById('fname').value,
+      "lastName": "SomeLastName", //document.getElementById('lname').value
+      "dateOfBirth": "1979-03-16T20:17:54.264Z"
     }
     xhr.send(JSON.stringify(user));
 
     xhr.onloadend = function () {
       // done
-      var url = "";
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      var xhr2 = new XMLHttpRequest();
+      var url = "http://localhost:3000/api/Application";
+      xhr2.open("POST", url, true);
+      xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
       application = {
         "$class": "org.real.hackers.Application",
+        "appId": "app0003", // Auto generate ID
         "customer": "org.real.hackers.Customer#" + uniqid,
         "creditHistory": "none",
         "propertyName": "New Mansio Zurich",
         "fundingRequest": 300000,
+        "duration": 1,
+        "signatures": [],
+        "applicationStatus": 0
       }
-
-      xhr.send(JSON.stringify(application));
+      xhr2.send(JSON.stringify(application));
+      
       document.getElementById("loadAnimation").style = "display:none;";
     };
 
