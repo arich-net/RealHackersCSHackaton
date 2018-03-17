@@ -10,8 +10,17 @@ asset Application identified by appId {
   o String propertyName
   o Double fundingRequest
   o Integer duration
-  o Signature[] signatures optional
+  o Signature[] signatures
   o Integer applicationStatus
+}
+
+asset MortgageContract identified by mortgageId {
+  o String mortgageId
+  o Integer duration
+  o Integer fundingAmount
+  o String paymentSchedule
+  --> Application application
+  --> Bank bank
 }
 
 participant Customer identified by customerId {
@@ -40,5 +49,9 @@ concept Signature {
 transaction Validation {
   --> Application application
   o Signature signature
+}
+
+transaction ContractAssignement {
+  o Double moneyAmount
 }
   

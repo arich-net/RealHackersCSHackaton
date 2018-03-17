@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    input[type=text],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    h2 {
+      color: #4CAF50;
+    }
+
+    label {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+    }
+
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    .container {
+      border-radius: 5px;
+      background-color: #8586885e;
+      padding: 20px;
+    }
+
+    .col-25 {
+      float: left;
+      width: 25%;
+      margin-top: 6px;
+    }
+
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+
+    @media screen and (max-width: 600px) {
+      .col-25,
+      .col-75,
+      input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      /* Light grey */
+      border-top: 16px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Mortage online</h2>
+  <p>Please enter your details for your financing request</p>
+
+  <div class="container">
+    <form id="userForm">
+      <div class="loader" id="loadAnimation" style="display:none"></div>
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">First Name</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="lname">Last Name</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="loan">Loan request</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="loan" name="loan" placeholder="200.000 CHF">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="loan">Credit history</label>
+        </div>
+        <div class="col-75">
+          <input type="file" id="credit" name="credit" placeholder="please select file">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subject">Property description</label>
+        </div>
+        <div class="col-75">
+          <input type="file" id="subject" name="subject" placeholder="please select file">
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+</body>
+<script>
+  var userForm = document.getElementById('userForm');
+  
+  userForm.onsubmit = function (e) {
+    e.preventDefault();
+    document.getElementById('loadAnimation').style = "position: absolute;left: 50%;top: 50%;"
+    var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    var uniqid = randLetter + Date.now();
+    var xhr = new XMLHttpRequest();
+    var url = "";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    user = {
+      "$class": "org.real.hackers.Customer",
+      "customerId": uniqid,
+      "firstName": document.getElementById('fname').value,
+      "lastName": document.getElementById('lname').value
+    }
+    xhr.send(JSON.stringify(user));
+
+    xhr.onloadend = function () {
+      // done
+      var url = "";
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      application = {
+        "$class": "org.real.hackers.Application",
+        "customer": "org.real.hackers.Customer#" + uniqid,
+        "creditHistory": "none",
+        "propertyName": "New Mansio Zurich",
+        "fundingRequest": 300000,
+      }
+
+      xhr.send(JSON.stringify(application));
+      document.getElementById("loadAnimation").style = "display:none;";
+    };
+
+  }
+</script>
+
+</html>
