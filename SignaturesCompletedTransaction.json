@@ -1,0 +1,4 @@
+{
+  "$class": "org.real.hackers.SignaturesCompletedTransaction",
+  "application": "resource:org.real.hackers.Application#app0001"
+}

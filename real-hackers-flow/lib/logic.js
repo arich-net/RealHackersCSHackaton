@@ -33,3 +33,29 @@ function execValidation(validation) {
         });
 
 }
+
+/**
+ * Sample transaction processor function.
+ * @param {org.real.hackers.SignaturesCompletedTransaction} signaturesCompleted Check signatures.
+ * @transaction
+ */
+function signaturesCompletedTransaction(signaturesCompleted) {
+    var factory = getFactory();
+
+    var application = signaturesCompleted.application;
+    var signaturesokevent = factory.newEvent('org.real.hackers', 'SignaturesCompleted'); 
+
+    if(application.applicationStatus == 3){
+        emit(signaturesokevent);
+    }
+}
+
+/**
+ * Sample transaction processor function.
+ * @param {org.real.hackers.SubscribeSignaturesCompletedEvent} event listener.
+ * @transaction
+ */
+function subscribeSignaturesCompletedEvent(event) {
+    // event: { "$class": "org.namespace.BasicEvent", "eventId": "0000-0000-0000-000000#0" }
+    console.log(event);
+}

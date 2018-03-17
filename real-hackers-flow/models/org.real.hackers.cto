@@ -55,3 +55,13 @@ transaction ContractAssignement {
   o Double moneyAmount
 }
   
+transaction SignaturesCompletedTransaction {
+  --> Application application
+}
+
+event SignaturesCompleted {
+}
+
+transaction SubscribeSignaturesCompletedEvent {
+  o Event SignaturesCompleted
+}
