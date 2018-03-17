@@ -1,0 +1,86 @@
+[
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "111111",
+    "firstName": "Jose",
+    "lastName": "Perez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "111112",
+    "firstName": "Alejandro",
+    "lastName": "Vasquez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "A1521275595762",
+    "firstName": "Mariel",
+    "lastName": "Vasquez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "C1521274973776",
+    "firstName": "Ariel",
+    "lastName": "Vasquez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "D1521273857402",
+    "firstName": "SomeName",
+    "lastName": "SomeLastName",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "D1521276008206",
+    "firstName": "Mariel2",
+    "lastName": "Chirino",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "J1521275135532",
+    "firstName": "Ariel",
+    "lastName": "Good",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "Q1521276245031",
+    "firstName": "Mariel4",
+    "lastName": "Chirino",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "T1521276102055",
+    "firstName": "Mariel3",
+    "lastName": "Vasquez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "U1521276453678",
+    "firstName": "Mariel5",
+    "lastName": "Vasquez",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "W1521273442275",
+    "firstName": "SomeName",
+    "lastName": "SomeLastName",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  },
+  {
+    "$class": "org.real.hackers.Customer",
+    "customerId": "Y1521274411371",
+    "firstName": "SomeName",
+    "lastName": "SomeLastName",
+    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+  }
+]
