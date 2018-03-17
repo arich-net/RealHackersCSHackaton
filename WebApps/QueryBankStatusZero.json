@@ -1,0 +1,68 @@
+[
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-C1521274973776",
+    "customer": "resource:org.real.hackers.Customer#C1521274973776",
+    "creditHistory": "none",
+    "propertyName": "New Mansio Zurich",
+    "fundingRequest": 300000,
+    "duration": 1,
+    "signatures": [],
+    "applicationStatus": 0
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-J1521275135532",
+    "customer": "resource:org.real.hackers.Customer#J1521275135532",
+    "creditHistory": "none",
+    "propertyName": "New Mansio Zurich",
+    "fundingRequest": 300000,
+    "duration": 1,
+    "signatures": [],
+    "applicationStatus": 0
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-U1521276453678",
+    "customer": "resource:org.real.hackers.Customer#U1521276453678",
+    "creditHistory": "none",
+    "propertyName": "Adliswil 22",
+    "fundingRequest": 20000000,
+    "duration": 1,
+    "signatures": [],
+    "applicationStatus": 0
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-Y1521274411371",
+    "customer": "resource:org.real.hackers.Customer#Y1521274411371",
+    "creditHistory": "none",
+    "propertyName": "New Mansio Zurich",
+    "fundingRequest": 300000,
+    "duration": 1,
+    "signatures": [],
+    "applicationStatus": 0
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app0002",
+    "customer": "resource:org.real.hackers.Customer#111112",
+    "creditHistory": "none",
+    "propertyName": "New Mansio Zurich",
+    "fundingRequest": 300000,
+    "duration": 2,
+    "signatures": [],
+    "applicationStatus": 0
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app0003",
+    "customer": "resource:org.real.hackers.Customer#D1521273857402",
+    "creditHistory": "none",
+    "propertyName": "New Mansio Zurich",
+    "fundingRequest": 300000,
+    "duration": 1,
+    "signatures": [],
+    "applicationStatus": 0
+  }
+]

@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -24,7 +22,8 @@
       border-radius: 4px;
       resize: vertical;
     }
-    h2{
+
+    h2 {
       color: #008CBA;
     }
 
@@ -101,70 +100,78 @@
         margin-top: 0;
       }
     }
-  
-.checkContainer {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+
+    .checkContainer {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
     /* Hide the browser's default checkbox */
-.checkContainer input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
 
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-}
+    .checkContainer input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
 
-/* On mouse-over, add a grey background color */
-.contacheckContaineriner:hover input ~ .checkmark {
-    background-color: #ccc;
-}
+    /* Create a custom checkbox */
 
-/* When the checkbox is checked, add a blue background */
-.checkContainer input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+    }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
+    /* On mouse-over, add a grey background color */
 
-/* Show the checkmark when checked */
-.checkContainer input:checked ~ .checkmark:after {
-    display: block;
-}
+    .contacheckContaineriner:hover input~.checkmark {
+      background-color: #ccc;
+    }
 
-/* Style the checkmark/indicator */
-.checkContainer .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
+    /* When the checkbox is checked, add a blue background */
+
+    .checkContainer input:checked~.checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+
+    .checkContainer input:checked~.checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+
+    .checkContainer .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
   </style>
 </head>
 
@@ -173,92 +180,171 @@
   <h2>Banks View - validation tasks for 17.03.2018</h2>
   <div class="container">
     <div id="mapid" style="min-height: 300px; height: 100%;">
+        <script>
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+      
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+              maxZoom: 18,
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+              id: 'mapbox.streets'
+            }).addTo(mymap);
+      
+            var geo_applications = [{
+              "type": "Feature",
+              "properties": { "firstName": "Fabian", "lastName": "Diergardt", "fundingRequest": '3000000 CHF', "PropertyDescription": "Westminster Abbey" },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [-0.09, 51.505]
+              }
+            }, {
+              "type": "Feature",
+              "properties": { "firstName": "Fabian", "lastName": "Diergardt", "fundingRequest": '4000000 CHF', "PropertyDescription": "London Eye..." },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [-0.09, 51.505]
+              }
+            }];
+      
+            var myStyle = {
+              "color": "#ff7800",
+              "weight": 5,
+              "opacity": 0.65
+            };
+      
+            L.geoJSON(geo_applications, {
+              style: myStyle,
+              onEachFeature: function (feature, layer) {
+                layer.bindPopup('<h2>' + feature.properties.PropertyDescription + '</h2><p>Last name: ' + feature.properties.lastName + '<br>Funding request: ' + feature.properties.fundingRequest + '</p>');
+              }
+            }).addTo(mymap);
+
+
+                       var applications = [
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app-C1521274973776",
+          "customer": "resource:org.real.hackers.Customer#C1521274973776",
+          "creditHistory": "none",
+          "propertyName": "New Mansio Zurich",
+          "fundingRequest": 300000,
+          "duration": 1,
+          "signatures": [],
+          "applicationStatus": 0
+        },
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app-J1521275135532",
+          "customer": "resource:org.real.hackers.Customer#J1521275135532",
+          "creditHistory": "none",
+          "propertyName": "New Mansio Zurich",
+          "fundingRequest": 300000,
+          "duration": 1,
+          "signatures": [],
+          "applicationStatus": 0
+        },
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app-U1521276453678",
+          "customer": "resource:org.real.hackers.Customer#U1521276453678",
+          "creditHistory": "none",
+          "propertyName": "Adliswil 22",
+          "fundingRequest": 20000000,
+          "duration": 1,
+          "signatures": [],
+          "applicationStatus": 0
+        },
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app-Y1521274411371",
+          "customer": "resource:org.real.hackers.Customer#Y1521274411371",
+          "creditHistory": "none",
+          "propertyName": "New Mansio Zurich",
+          "fundingRequest": 300000,
+          "duration": 1,
+          "signatures": [],
+          "applicationStatus": 0
+        },
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app0002",
+          "customer": "resource:org.real.hackers.Customer#111112",
+          "creditHistory": "none",
+          "propertyName": "New Mansio Zurich",
+          "fundingRequest": 300000,
+          "duration": 2,
+          "signatures": [],
+          "applicationStatus": 0
+        },
+        {
+          "$class": "org.real.hackers.Application",
+          "appId": "app0003",
+          "customer": "resource:org.real.hackers.Customer#D1521273857402",
+          "creditHistory": "none",
+          "propertyName": "New Mansio Zurich",
+          "fundingRequest": 300000,
+          "duration": 1,
+          "signatures": [],
+          "applicationStatus": 0
+        }
+      ]
+      
+      
+            function createTable(data) {
+              var globalCounter = 0;
+              //var tbody = document.getElementById('tBody');
+              var tbody = document.createElement("table");
+              document.body.appendChild(tbody);
+              var col = [];
+              for (var i = 0; i < data.length; i++) {
+                for (var key in data[i]) {
+                  if (col.indexOf(key) === -1) {
+                    col.push(key);
+                  }
+                }
+              }
+      
+              var col = ['appId', 'customer', 'propertyName', 'fundingRequest'];
+              var colNames = ['Applikation-Id', 'Customer-Id', 'property name', 'funding request'];
+      
+              var colNamesUi = ['Accept/Decline', 'Signed By', 'Signature'];
+              var fields = ['<label class="checkContainer"><input type="checkbox"><span class="checkmark"></span></label>', '<input type="Text"></input>', '<input type="Text"></input>'];
+              var tr = tbody.insertRow(-1);                   // TABLE ROW.
+              for (var i = 0; i < colNames.length; i++) {
+                var th = document.createElement("th");      // TABLE HEADER.
+                th.innerHTML = colNames[i];
+                tr.appendChild(th);
+              }
+      
+              for (var i = 0; i < colNamesUi.length; i++) {
+                var th = document.createElement("th");      // TABLE HEADER.
+                th.innerHTML = colNamesUi[i];
+                tr.appendChild(th);
+              }
+      
+              // ADD JSON DATA TO THE TABLE AS ROWS.
+              for (var i = 0; i < data.length; i++) {
+                tr = tbody.insertRow(-1);
+                for (var j = 0; j < col.length; j++) {
+                  var tabCell = tr.insertCell(-1);
+                  tabCell.innerHTML = data[i][col[j]];
+                }
+      
+                for (var j = 0; j < colNamesUi.length; j++) {
+                  var tabCell = tr.insertCell(-1);
+                  tabCell.innerHTML = fields[j];
+                }
+              }
+              
+            }
+      
+            createTable(applications)
+          </script>
     </div>
-    <script>
-      var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'mapbox.streets'
-      }).addTo(mymap);
-
-      var applications = [{
-        "type": "Feature",
-        "properties": { "firstName": "Fabian", "lastName": "Diergardt", "fundingRequest": '3000000 CHF', "PropertyDescription":"Westminster Abbey" },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-0.09, 51.505]
-        }
-      }, {
-        "type": "Feature",
-        "properties": { "firstName": "Fabian", "lastName": "Diergardt", "fundingRequest": '4000000 CHF', "PropertyDescription":"London Eye..."  },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-0.09, 51.505]
-        }
-      }];
-
-      var myStyle = {
-        "color": "#ff7800",
-        "weight": 5,
-        "opacity": 0.65
-      };
-
-      L.geoJSON(applications, {
-        style: myStyle,
-        onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h2>'+feature.properties.PropertyDescription+'</h2><p>Last name: '+ feature.properties.lastName + '<br>Funding request: '+ feature.properties.fundingRequest + '</p>');
-  }
-      }).addTo(mymap);
-
-      function createTable() {
-        applications.features.forEach(function (entry) {
-          document.getElementById("example").innerHTML += "<tr><td>" + "Test" + "</td><td>" + "Value" + "</td></tr>";
-        });
-      };
-
-    </script>
   </div>
-  <table id="example" class="display" width="100%">
-    <table>
-      <tr>
-        <th>FirstName</th>
-        <th>LastName</th>
-        <th>funding Request</th>
-        <th>Property description</th>
-        <td>Accept/Decline</td>
-        <th>Signed By</th>
-        <th>Signature</th>
-      </tr>
-      <tr>
-        <td>Peter</td>
-        <td>W</td>
-        <td>200000 CHF</td>
-        <td>London Eye...</td>
-        <td><label class="checkContainer">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label></td>
-        <td><input type="Text"></input></td>
-        <td><input type="Text"></input></td>
-      </tr>
-      <tr>
-        <td>Fabian</td>
-        <td>D</td>
-        <td>200000 CHF</td>
-        <td>Westminster Abbey</td>
-        <td><label class="checkContainer">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label></td>
-        <td><input type="Text"></input></td>
-        <td><input type="Text"></input></td>
-      </tr>
-    </table>
-  </table>
+  <div id="tableContainer" class="display" width="100%">
+  </div>
   <div class="row">
     <input type="submit" value="Submit">
   </div>
