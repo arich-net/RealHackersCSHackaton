@@ -3,6 +3,14 @@
  */
 namespace org.real.hackers
 
+participant User identified by userId {
+  o String userId
+  o String email
+  o String firstName
+  o String lastName
+  o String userGroup
+}
+
 asset Application identified by appId {
   o String appId
   --> Customer customer

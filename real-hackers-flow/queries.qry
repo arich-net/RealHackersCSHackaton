@@ -20,3 +20,10 @@ query selectBankStatusAll {
   statement:
       SELECT org.real.hackers.Application
 }
+
+query selectBankStatusAllOrdered {
+  description: "Select AllBank Approved"
+  statement:
+      SELECT org.real.hackers.Application
+         ORDER BY applicationStatus
+}
