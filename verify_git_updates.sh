@@ -10,6 +10,12 @@ PATH=/opt/hyperledger/.nvm/versions/node/v8.10.0/bin:/usr/local/bin:/usr/bin:/bi
 LOCKDIR=/tmp/gitupdate-lock
 PIDFILE=${LOCKDIR}/PID
 
+log_message() {
+   MESSAGE=$1
+   echo "[`date '+%Y%m%d %X'`] $MESSAGE"
+   logger $MESSAGE
+}
+
 if mkdir "${LOCKDIR}" &>/dev/null; then
   echo "$$" >"${PIDFILE}"
 
@@ -19,24 +25,19 @@ if mkdir "${LOCKDIR}" &>/dev/null; then
   git remote update &>/dev/null # Update REFS
   
   if [ "`git status -uno | egrep 'behind'`" != "" ]; then
-    logger "GIT Repo require update"
-    echo "GIT Repo require update"
+    log_message "GIT Repo require update"
     # We track the files that were pulled
     GIT_RESULT=$(git pull -v 2>/dev/null)
     if [ "$(echo $GIT_RESULT | egrep 'real-hackers-flow')" != "" ]; then
-      logger "The model have been changed - need to recreate business network model"
-      echo "The model have been changed - need to recreate business network model"
+      log_message "The model have been changed - need to recreate business network model"
       cd real-hackers-flow
-      RESULT=$(composer archive create --sourceType dir --sourceName . -a real-hackers-flow@0.0.1.bna 2>/dev/null)
-      logger $RESULT
-      RESULT=$(composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>/dev/null)
-      logger $RESULT
+      composer archive create --sourceType dir --sourceName . -a real-hackers-flow@0.0.1.bna 2>&1
+      composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>&1
 
-      logger "The model have changed successfully"
-      echo "The model have changed successfully"
+      log_message "The model have changed successfully"
     fi
   else
-    echo "GIT Repo DO NOT require update"
+    log_message "GIT Repo DO NOT require update"
   fi
  
   # Remove the LOCK
@@ -44,6 +45,5 @@ if mkdir "${LOCKDIR}" &>/dev/null; then
   popd &>/dev/null
 
 else
-  logger "Avoid having parallel execution"
-  echo "Avoid having parallel execution"
+  log_message "Avoid having parallel execution"
 fi
