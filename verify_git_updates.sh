@@ -36,6 +36,7 @@ if mkdir "${LOCKDIR}" &>/dev/null; then
 
       log_message "The model have changed successfully"
     fi
+    log_message "GIT Repo updated successfully"
   else
     log_message "GIT Repo DO NOT require update"
   fi
