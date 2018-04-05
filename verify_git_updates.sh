@@ -13,7 +13,6 @@ PIDFILE=${LOCKDIR}/PID
 log_message() {
    MESSAGE=$1
    echo "[`date '+%Y%m%d %X'`] $MESSAGE"
-   logger $MESSAGE
 }
 
 if mkdir "${LOCKDIR}" &>/dev/null; then
