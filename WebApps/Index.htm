@@ -9,6 +9,10 @@
     </body>
 </html>
 <script>
+    function isEmpty(str) {
+        return (!str || 0 === str.length);
+    }
+
     function getCookie(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
@@ -28,9 +32,9 @@
     function verifySessionToken() {
         var myCookie = getCookie("access_token");
 
-        if (myCookie == null) {
+        if (isEmpty(myCookie)) {
             // do cookie doesn't exist stuff;
-            var content = '<h1>User not logged in</h1>';
+            var content = "<h1>User not logged in</h1>";
             document.getElementsByTagName('body')[0].innerHTML = content; 
         }
         else {
@@ -41,4 +45,5 @@
     window.onload = function() {
         verifySessionToken();
     };
+
 </script>
