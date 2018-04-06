@@ -4,6 +4,7 @@
     </head>
     <body>
         <h1>Real Hackers Index</h1>
+        <h2>Welcome Participant: <div id="Participant">Participant</div></h2>
         <p><a href="Bank.htm">Bank Application</a></p>
         <p><a href="Client.htm">Client Application</a></p>
     </body>
@@ -37,7 +38,8 @@
             window.location.replace("Login.htm");
         }
         else {
-            alert("Cookie: " + myCookie);
+            //alert("Cookie: " + myCookie);
+            document.getElementById("Participant").innerHTML = myCookie;
         }
     }
 
