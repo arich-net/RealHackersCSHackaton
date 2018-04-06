@@ -10,6 +10,15 @@
     </body>
 </html>
 <script>
+    // Global variables
+    var xhr = new XMLHttpRequest();
+    var pingapi = "https://blockchain.arich-net.com/api/system/ping";
+    var access_token = "";
+
+    function getParticipantID() {
+
+    }
+
     function isEmpty(str) {
         return (!str || 0 === str.length);
     }
@@ -39,7 +48,9 @@
         }
         else {
             //alert("Cookie: " + myCookie);
-            document.getElementById("Participant").innerHTML = myCookie;
+            var pivot = myCookie.match(/.*:([^\.]*).*/);
+            access_token = pivot[1];
+            document.getElementById("Participant").innerHTML = access_token;
         }
     }
 
