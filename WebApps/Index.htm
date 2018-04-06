@@ -34,8 +34,7 @@
 
         if (isEmpty(myCookie)) {
             // do cookie doesn't exist stuff;
-            var content = "<h1>User not logged in</h1>";
-            document.getElementsByTagName('body')[0].innerHTML = content; 
+            window.location.replace("Login.htm");
         }
         else {
             alert("Cookie: " + myCookie);
