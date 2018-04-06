@@ -30,6 +30,8 @@
 
         if (myCookie == null) {
             // do cookie doesn't exist stuff;
+            var content = '<h1>User not logged in</h1>';
+            document.getElementsByTagName('body')[0].innerHTML = content; 
         }
         else {
             alert("Cookie: " + myCookie);
