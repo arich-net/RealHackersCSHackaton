@@ -36,8 +36,8 @@
         xhr.send();
 
         while (!processed){
-            await sleep(1000);
-            console.log("User Data: " + userdata.participant + "; Processed: " + processed);
+            console.log("P. User Data: " + userdata.participant + "; Processed: " + processed);
+            await sleep(1000);            
         }
         return userdata.participant;
         //console.log("User Data: " + userdata.participant);
