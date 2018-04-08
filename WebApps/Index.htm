@@ -13,6 +13,7 @@
 <script>
     function getParticipantID(access_token) {
         console.log("Access_Token: " + access_token);
+        var userdata = "";
         var xhr = new XMLHttpRequest();
         var pingapi = "https://blockchain.arich-net.com/api/system/ping";
 
@@ -22,7 +23,7 @@
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                var userdata = JSON.parse(this.responseText);
+                userdata = JSON.parse(this.responseText);
             }
         };
         xhr.send();
