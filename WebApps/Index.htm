@@ -17,7 +17,7 @@
         var pingapi = "https://blockchain.arich-net.com/api/system/ping";
 
         xhr.open("GET", pingapi, true);
-        xhr.setRequest.Header('Content-Type', 'application/json; charset=UTF-8');
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function() {
