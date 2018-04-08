@@ -11,11 +11,9 @@
     </body>
 </html>
 <script>
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    var access_token = "";
 
-    async function getParticipantID(access_token) {
+    function getParticipantID() {
         console.log("Access_Token: " + access_token);
         var processed = false;
         var userdata = "";
@@ -29,17 +27,10 @@
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);                
-                processed = true; 
-                console.log("User Data: " + userdata.participant + "; Processed: " + processed);
+                document.getElementById("Participant").innerHTML = userdata.participant;
             }
         };
         xhr.send();
-
-        while (!processed){
-            console.log("P. User Data: " + userdata.participant + "; Processed: " + processed);
-            await sleep(1000);            
-        }
-        return userdata.participant;
         //console.log("User Data: " + userdata.participant);
     }
 
@@ -74,7 +65,7 @@
             //alert("Cookie: " + myCookie);
             var pivot = myCookie.match(/.*:([^\.]*).*/);
             access_token = pivot[1];
-            document.getElementById("Participant").innerHTML = getParticipantID(access_token);
+            getParticipantID();
         }
     }
 
