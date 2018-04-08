@@ -11,13 +11,16 @@
     </body>
 </html>
 <script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     function getParticipantID(access_token) {
         console.log("Access_Token: " + access_token);
         var processed = false;
         var userdata = "";
         var xhr = new XMLHttpRequest();
         var pingapi = "https://blockchain.arich-net.com/api/system/ping";
-        var noop = function () {};
 
         xhr.open("GET", pingapi, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -25,15 +28,16 @@
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                userdata = JSON.parse(this.responseText);
-                console.log("User Data: " + userdata.participant);
+                userdata = JSON.parse(this.responseText);                
                 processed = true; 
+                console.log("User Data: " + userdata.participant + "; Processed: " + processed);
             }
         };
         xhr.send();
 
         while (!processed){
-            noop;
+            sleep(1000);
+            console.log("User Data: " + userdata.participant + "; Processed: " + processed);
         }
         return userdata.participant;
         //console.log("User Data: " + userdata.participant);
