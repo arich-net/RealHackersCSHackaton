@@ -54,13 +54,13 @@
             xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
             xhr.setRequestHeader('Accept', 'application/json');
             xhr.setRequestHeader('X-Access-Token', access_token);
-            xhttp.onreadystatechange = function() {
+            xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var userdata = JSON.parse(this.responseText);
                     document.getElementById("Participant").innerHTML = userdata.participant;
                 }
             };
-            xhttp.send();
+            xhr.send();
         }
     }
 
