@@ -17,8 +17,9 @@
     var access_token = "";
 
     function getParticipantID() {
+        console.log("Access_Token: " + access_token);
         xhr.open("GET", pingapi, true);
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xhr.setRequest.Header('Content-Type', 'application/json; charset=UTF-8');
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function() {
