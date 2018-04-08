@@ -13,9 +13,11 @@
 <script>
     function getParticipantID(access_token) {
         console.log("Access_Token: " + access_token);
+        var processed = false;
         var userdata = "";
         var xhr = new XMLHttpRequest();
         var pingapi = "https://blockchain.arich-net.com/api/system/ping";
+        var noop = function () {};
 
         xhr.open("GET", pingapi, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -25,10 +27,15 @@
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);
                 console.log("User Data: " + userdata.participant);
-                return userdata.participant;
+                processed = true; 
             }
         };
         xhr.send();
+
+        while (!processed){
+            noop;
+        }
+        return userdata.participant;
         //console.log("User Data: " + userdata.participant);
     }
 
