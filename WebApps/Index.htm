@@ -25,11 +25,11 @@
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);
                 console.log("User Data: " + userdata.participant);
+                return userdata.participant;
             }
         };
         xhr.send();
         //console.log("User Data: " + userdata.participant);
-        return userdata.participant;
     }
 
     function isEmpty(str) {
