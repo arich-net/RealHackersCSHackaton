@@ -163,8 +163,6 @@
   </div>
 </body>
 <script>
-  var customerapi = "https://blockchain.arich-net.com/api/Customer";
-  var applicationapi = "https://blockchain.arich-net.com/api/Application";
   var access_token = "";
   var userForm = document.getElementById('userForm');
 
@@ -213,6 +211,7 @@
     var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     var uniqid = randLetter + Date.now();
     var xhr = new XMLHttpRequest();
+    var customerapi = "https://blockchain.arich-net.com/api/Customer";
     //var url = "http://localhost:3000/api/Customer";
     xhr.open("POST", customerapi, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -231,6 +230,7 @@
       // done
       var xhr2 = new XMLHttpRequest();
       //var url = "http://localhost:3000/api/Application";
+      var applicationapi = "https://blockchain.arich-net.com/api/Application";
       xhr2.open("POST", applicationapi, true);
       xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
       xhr2.setRequestHeader('X-Access-Token', access_token);
