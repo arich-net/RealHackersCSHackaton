@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="utf-8"/>
         <title>Blockchain LAB for Real Hackers</title>
     </head>
     <body>
@@ -16,7 +17,17 @@
     var access_token = "";
 
     function getParticipantID() {
-
+        xhr.open("GET", pingapi, true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('X-Access-Token', access_token);
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var userdata = JSON.parse(this.responseText);
+            }
+        };
+        xhr.send();
+        return userdata.participant;
     }
 
     function isEmpty(str) {
@@ -50,17 +61,7 @@
             //alert("Cookie: " + myCookie);
             var pivot = myCookie.match(/.*:([^\.]*).*/);
             access_token = pivot[1];
-            xhr.open("GET", pingapi, true);
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            xhr.setRequestHeader('Accept', 'application/json');
-            xhr.setRequestHeader('X-Access-Token', access_token);
-            xhr.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var userdata = JSON.parse(this.responseText);
-                    document.getElementById("Participant").innerHTML = userdata.participant;
-                }
-            };
-            xhr.send();
+            document.getElementById("Participant").innerHTML = getParticipantID();
         }
     }
 

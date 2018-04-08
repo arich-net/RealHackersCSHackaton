@@ -163,18 +163,61 @@
   </div>
 </body>
 <script>
+  var customerapi = "https://blockchain.arich-net.com/api/Customer";
+  var applicationapi = "https://blockchain.arich-net.com/api/Application";
+  var access_token = "";
   var userForm = document.getElementById('userForm');
-  
+
+  function isEmpty(str) {
+        return (!str || 0 === str.length);
+    }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function verifySessionToken() {
+      var myCookie = getCookie("access_token");
+
+      if (isEmpty(myCookie)) {
+          // do cookie doesn't exist stuff;
+          window.location.replace("Login.htm");
+      }
+      else {
+          //alert("Cookie: " + myCookie);
+          var pivot = myCookie.match(/.*:([^\.]*).*/);
+          access_token = pivot[1];
+          //document.getElementById("Participant").innerHTML = getParticipantID();
+      }
+  }
+
+  window.onload = function() {
+      verifySessionToken();
+  };
+
   userForm.onsubmit = function (e) {
     e.preventDefault();
     document.getElementById('loadAnimation').style = "position: absolute;left: 50%;top: 50%;"
     var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     var uniqid = randLetter + Date.now();
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:3000/api/Customer";
-    xhr.open("POST", url, true);
+    //var url = "http://localhost:3000/api/Customer";
+    xhr.open("POST", customerapi, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-Access-Token', access_token);
     user = {
       "$class": "org.real.hackers.Customer",
       "customerId": uniqid,
@@ -187,9 +230,10 @@
     xhr.onloadend = function () {
       // done
       var xhr2 = new XMLHttpRequest();
-      var url = "http://localhost:3000/api/Application";
-      xhr2.open("POST", url, true);
+      //var url = "http://localhost:3000/api/Application";
+      xhr2.open("POST", applicationapi, true);
       xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      xhr2.setRequestHeader('X-Access-Token', access_token);
       application = {
         "$class": "org.real.hackers.Application",
         "appId": "app-" + uniqid, // Auto generate ID
