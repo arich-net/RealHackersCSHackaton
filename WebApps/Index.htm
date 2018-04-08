@@ -15,7 +15,7 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    function getParticipantID(access_token) {
+    async function getParticipantID(access_token) {
         console.log("Access_Token: " + access_token);
         var processed = false;
         var userdata = "";
@@ -36,7 +36,7 @@
         xhr.send();
 
         while (!processed){
-            sleep(1000);
+            await sleep(1000);
             console.log("User Data: " + userdata.participant + "; Processed: " + processed);
         }
         return userdata.participant;
