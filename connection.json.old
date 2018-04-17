@@ -1,0 +1,22 @@
+{
+  "name": "real-hackers-network",
+  "type": "hlfv1",
+  "mspID": "Org1MSP",
+  "peers": [
+    {
+      "requestURL": "grpc://192.168.130.14:7051",
+      "eventURL": "grpc://192.168.130.14:7053"
+    }
+  ],
+  "ca": {
+    "url": "http://192.168.130.14:7054",
+    "name": "ca.org1.example.com"
+  },
+  "orderers": [
+    {
+      "url" : "grpc://192.168.130.14:7050"
+    }
+  ],
+  "channel": "composerchannel",
+  "timeout": 300
+}
