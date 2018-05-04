@@ -221,7 +221,7 @@ $ docker run \
      --network composer_default \
      -p 3000:3000 \
      myorg/my-composer-rest-server
-
+```
 * Verify docker rest logs
 ```
 $ docker logs -f rest
