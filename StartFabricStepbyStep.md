@@ -177,8 +177,8 @@ COMPOSER_PROVIDERS='{
     "github": {
         "provider": "github",
         "module": "passport-github",
-        "clientID": "37ebf31e474690ba1d02",
-        "clientSecret": "8c6aeb988a4d3beac2fcbcb7f5fd43c1f9fb3bff",
+        "clientID": "******************",
+        "clientSecret": "********************************",
         "authPath": "/auth/github",
         "callbackURL": "https://blockchain.arich-net.com/auth/github/callback",
         "successRedirect": "http://blockchain.arich-net.com/Success.htm",
