@@ -1,7 +1,7 @@
 ; userconfig /opt/hyperledger/.npmrc
 ; cafile=/tmp/cachain.pem
-registry=http://registry.npmjs.org/
-strict-ssl=false
-unsafe-perm=true
-rejectUnauthorized=false
+; registry=http://registry.npmjs.org/
+; strict-ssl=false
+; unsafe-perm=true
+; rejectUnauthorized=false
 
