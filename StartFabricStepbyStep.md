@@ -198,8 +198,6 @@ COMPOSER_DATASOURCES='{
 $ source envvars.txt
 $ echo $COMPOSER_CARD
 restadmin@real-hackers-flow
-
-Command succeeded
 ```
 * Make ~/.composer read/write for ALL
 ```
