@@ -1,14 +1,43 @@
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Blockchain LAB for Real Hackers</title>
-    </head>
-    <body>
-        <h1>Real Hackers Index - Demo Fabian</h1>
-        <h2>Welcome Participant: <div id="Participant">Participant</div></h2>
-        <p><a href="Bank.htm">Bank Application</a></p>
-        <p><a href="Client.htm">Client Application</a></p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blockchain LAB for Real Hackers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <h1>Real Hackers Index</h1>
+            <h4>Welcome <span id="Participant"></span></h4>
+        </div>
+        <div class="card-columns">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Bank view</h4>
+                    <p class="card-text">Approvers view within a bank. Used to sign a customer request</p>
+                    <a href="Bank.htm" class="btn btn-primary">Start app</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Client view</h4>
+                    <p class="card-text">Clients have to add their details to apply for a mortage contract.</p>
+                    <a href="Client.htm" class="btn btn-primary">Start app</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
 </html>
 <script>
     var access_token = "";
@@ -24,9 +53,9 @@
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                userdata = JSON.parse(this.responseText);                
+                userdata = JSON.parse(this.responseText);
                 document.getElementById("Participant").innerHTML = userdata.participant;
             }
         };
@@ -42,7 +71,7 @@
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
+        for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
             while (c.charAt(0) == ' ') {
                 c = c.substring(1);
@@ -69,7 +98,7 @@
         }
     }
 
-    window.onload = function() {
+    window.onload = function () {
         verifySessionToken();
     };
 
