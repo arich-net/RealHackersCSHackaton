@@ -1,7 +1,7 @@
 {
     "name": "real-hackers-network",
     "x-type": "hlfv1",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "peers": {
         "peer0.org1.example.com": {
             "url": "grpc://192.168.130.14:7051",
