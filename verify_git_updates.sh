@@ -46,7 +46,10 @@ if mkdir "${LOCKDIR}" &>/dev/null; then
         log_message "Upgrade to new business network version $GITHUB_BNA_VERSION"
         composer network upgrade -c PeerAdmin@real-hackers-network -n real-hackers-flow -V $GITHUB_BNA_VERSION 2>&1
         #composer archive create --sourceType dir --sourceName . -a real-hackers-flow@0.0.1.bna 2>&1
-        #composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>&1
+        #composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>&1        
+        log_message "Restarting REST server"
+        docker stop rest 2>&1
+        docker start rest 2>&1
         log_message "The model have changed successfully"
       fi
     fi
