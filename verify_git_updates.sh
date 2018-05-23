@@ -30,10 +30,28 @@ if mkdir "${LOCKDIR}" &>/dev/null; then
     if [ "$(echo $GIT_RESULT | egrep 'real-hackers-flow')" != "" ]; then
       log_message "The model have been changed - need to recreate business network model"
       cd real-hackers-flow
-      composer archive create --sourceType dir --sourceName . -a real-hackers-flow@0.0.1.bna 2>&1
-      composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>&1
+      log_message "Verify current deployed business network archive"
+      TIMESTAMP=$(date +%s)
+      composer network download -c admin@real-hackers-flow -a /tmp/tempbusiness_$TIMESTAMP.bna 2>&1
+      DEPLOYED_BNA_VERSION=$(unzip -p /tmp/tempbusiness_$TIMESTAMP.bna package.json | jq .version | sed -e 's/\"//g')
+      GITHUB_BNA_VERSION=$(jq .version < package.json | sed -e s/\"//g)
 
-      log_message "The model have changed successfully"
+      if [ "$DEPLOYED_BNA_VERSION" == "$GITHUB_BNA_VERSION" ]; then
+        log_message "Deployed version the same as modified one - Please update package.json version"
+      else
+        log_message "Create new BNA file definition with version $GITHUB_BNA_VERSION"
+        composer archive create --sourceType dir --sourceName .  2>&1
+        log_message "Install new BNA file definition with version $GITHUB_BNA_VERSION"
+        composer network install -a real-hackers-flow@$GITHUB_BNA_VERSION.bna -c PeerAdmin@real-hackers-network 2>&1
+        log_message "Upgrade to new business network version $GITHUB_BNA_VERSION"
+        composer network upgrade -c PeerAdmin@real-hackers-network -n real-hackers-flow -V $GITHUB_BNA_VERSION 2>&1
+        #composer archive create --sourceType dir --sourceName . -a real-hackers-flow@0.0.1.bna 2>&1
+        #composer network update -a real-hackers-flow@0.0.1.bna -c admin@real-hackers-flow 2>&1        
+        log_message "Restarting REST server"
+        docker stop rest 2>&1
+        docker start rest 2>&1
+        log_message "The model have changed successfully"
+      fi
     fi
     log_message "GIT Repo updated successfully"
   else

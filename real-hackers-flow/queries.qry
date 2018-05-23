@@ -21,12 +21,6 @@ query selectBankStatusAll {
       SELECT org.real.hackers.Application
 }
 
-query selectBankStatusDemo {
-  description: "Select AllBank Approved"
-  statement:
-      SELECT org.real.hackers.Application
-}
-
 query selectBankStatusAllOrdered {
   description: "Select AllBank Approved"
   statement:

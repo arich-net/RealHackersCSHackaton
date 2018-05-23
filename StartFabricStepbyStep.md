@@ -122,13 +122,14 @@ strict-ssl = false
 * Install Composer Business Network with PeerAdmin card
 ```
 $ composer network install -c PeerAdmin@real-hackers-network \
-    -a real-hackers-flow@0.0.1.bna \
+    -a real-hackers-flow@`jq .version < package.json | sed -e s/\"//g`.bna \
     -o npmrcFile=/opt/hyperledger/git/RealHackersCSHackaton/npmrc.docker
 ```
 * Start Composer Business Network and create Admin Card
 ```
 $ composer network start --networkName real-hackers-flow \
-    --networkVersion 0.0.1 -A admin -S adminpw -c PeerAdmin@real-hackers-network
+    --networkVersion `jq .version < package.json | sed -e s/\"//g` \
+    -A admin -S adminpw -c PeerAdmin@real-hackers-network
 ```
 * Import admin of network business card
 ```
@@ -143,7 +144,10 @@ Configure composer-rest on docker with GitHub OAuth
 * Create card for REST admin account
 ```
 $ composer participant add -c admin@real-hackers-flow \
-   -d '{"$class":"org.hyperledger.composer.system.NetworkAdmin", "participantId":"restadmin"}'
+   -d '{
+      "$class":"org.hyperledger.composer.system.NetworkAdmin", 
+      "participantId":"restadmin"
+   }'
 $ composer identity issue -c admin@real-hackers-flow -f restadmin.card \
    -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
 $ composer card import -f  restadmin.card
@@ -227,12 +231,26 @@ $ docker logs -f rest
 * Add participants
 ```
 $ composer participant add -c admin@real-hackers-flow \
-   -d ' {"$class": "org.real.hackers.User","userId": "arich-net","email": "arich.net@gmail.com","firstName": "Ariel","lastName": "Vasquez","userGroup": "peerAdmin"} '
+   -d '{
+      "$class": "org.real.hackers.User",
+      "userId": "arich-net",
+      "email": "arich.net@gmail.com",
+      "firstName": "Ariel",
+      "lastName": "Vasquez",
+      "userGroup": "peerAdmin"
+   }'
 $ composer identity issue -u arich-net -a org.real.hackers.User#arich-net -c admin@real-hackers-flow 
 $ composer card import -f arich-net@real-hackers-flow.card
 
 $ composer participant add -c admin@real-hackers-flow \
-   -d ' {"$class": "org.real.hackers.User","userId": "FabianDi","email": "fdiergardt@gmx.de","firstName": "Fabian","lastName": "Diergart","userGroup": "peerAdmin"} '
+   -d '{
+      "$class": "org.real.hackers.User",
+      "userId": "FabianDi",
+      "email": "fdiergardt@gmx.de",
+      "firstName": "Fabian",
+      "lastName": "Diergart",
+      "userGroup": "peerAdmin"
+   }'
 $ composer identity issue -u FabianDi -a org.real.hackers.User#FabianDi -c admin@real-hackers-flow 
 $ composer card import -f FabianDi@real-hackers-flow.card
 ```
