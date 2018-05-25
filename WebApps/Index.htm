@@ -96,6 +96,7 @@
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function () {
+            console.log("Ready:" + this.readyState + " | Status: " + this.status);
             if (this.readyState == 4 && this.status == 200) {
                 getParticipantID();
             }
