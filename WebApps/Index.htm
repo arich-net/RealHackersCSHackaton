@@ -46,7 +46,7 @@
                         <input type="input" id="cardname" name="cardname" />
                     </div>
                     <div>
-                        <button onclick="uploadCard()">Upload</button>
+                        <button onclick="uploadCard()" id="uploadbutton">Upload</button>
                     </div>
                 </div>
             </div>
@@ -75,8 +75,10 @@
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);
                 document.getElementById("Participant").innerHTML = userdata.participant;
+                document.getElementById("uploadbutton").disabled = true;
             } else if (this.readyState == 4 && this.status == 500) {
-                document.getElementById("Participant").innerHTML = "<font color='red'>Please upload your card to your identiy</font>";
+                document.getElementById("Participant").innerHTML = "<font color='red'>Please upload your card to your identity</font>";
+                document.getElementById("uploadbutton").disabled = false;
             }
         };
         xhr.send();
@@ -96,8 +98,8 @@
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
         xhr.onreadystatechange = function () {
-            console.log("Ready:" + this.readyState + " | Status: " + this.status);
-            if (this.readyState == 4 && this.status == 200) {
+            //console.log("Ready:" + this.readyState + " | Status: " + this.status);
+            if (this.readyState == 4 && this.status == 204) {
                 getParticipantID();
             }
         };
