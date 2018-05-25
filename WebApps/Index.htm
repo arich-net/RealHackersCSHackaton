@@ -95,6 +95,11 @@
         xhr.open("POST", walletapi + params, true);
         xhr.setRequestHeader('Accept', 'application/json');
         xhr.setRequestHeader('X-Access-Token', access_token);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                getParticipantID();
+            }
+        };
         xhr.send(formData);
     }
 
