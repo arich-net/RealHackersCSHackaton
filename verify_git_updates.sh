@@ -12,7 +12,7 @@ PIDFILE=${LOCKDIR}/PID
 
 log_message() {
    MESSAGE=$1
-   echo "[`date '+%Y%m%d %X'`][`$$`][ver:`composer -v`] $MESSAGE"
+   echo "[`date '+%Y%m%d %X'`][`echo $$`][ver:`composer -v`][`which composer`] $MESSAGE"
 }
 
 if mkdir "${LOCKDIR}" &>/dev/null; then
