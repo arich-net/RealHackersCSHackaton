@@ -255,7 +255,8 @@ $ composer participant add -c admin@real-hackers-flow \
       "email": "arich.net@gmail.com",
       "firstName": "Ariel",
       "lastName": "Vasquez",
-      "userGroup": "peerAdmin"
+      "userGroup": "peerAdmin",
+      "bank": "org.real.hackers.Bank#bankid0001"
    }'
 $ composer identity issue -u arich-net -a org.real.hackers.User#arich-net -c admin@real-hackers-flow 
 $ composer card import -f arich-net@real-hackers-flow.card
@@ -267,7 +268,8 @@ $ composer participant add -c admin@real-hackers-flow \
       "email": "fdiergardt@gmx.de",
       "firstName": "Fabian",
       "lastName": "Diergart",
-      "userGroup": "peerAdmin"
+      "userGroup": "peerAdmin",
+      "bank": "org.real.hackers.Bank#bankid0001"
    }'
 $ composer identity issue -u FabianDi -a org.real.hackers.User#FabianDi -c admin@real-hackers-flow 
 $ composer card import -f FabianDi@real-hackers-flow.card
@@ -299,5 +301,14 @@ The connection to the network was successfully tested: real-hackers-flow
 $ composer card export -c arich-net@real-hackers-flow -f arich-net@real-hackers-flow.card
 $ composer card export -c FabianDi@real-hackers-flow -f FabianDi@real-hackers-flow.card
 ```
+* Make ~/.composer read/write for ALL
+```
+$ chmod -R 777 ~/.composer
+```
 * Import credential files into wallets using explorer (api/wallet/import)
+* Start playground and publish it on 8080
+```
+docker run --name composer-playground --publish 8080:8080 --detach hyperledger/composer-playground
+```
+
 
