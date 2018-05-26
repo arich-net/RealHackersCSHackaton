@@ -17,6 +17,8 @@ log_message() {
 
 if mkdir "${LOCKDIR}" &>/dev/null; then
   echo "$$" >"${PIDFILE}"
+  NVM_VERSION_USE=8.11.1
+  nvm use $NVM_VERSION_USE
 
   pushd . &>/dev/null
   cd /opt/hyperledger/git/RealHackersCSHackaton
