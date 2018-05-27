@@ -30,6 +30,23 @@
                     <a href="Client.htm" class="btn btn-info">Start app</a>
                 </div>
             </div>
+            <div class="card card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">Add card</h4>
+                    <p class="card-text">Upload your participant card to our blockchain.</p>
+                    <div>
+                        <label for="file">Choose card to upload</label>
+                        <input type="file" id="cardfile" name="cardfile" multiple />
+                    </div>
+                    <div>
+                        <label for="cardname">Card name</label>
+                        <input type="input" id="cardname" name="cardname" autocomplete="on" />
+                    </div>
+                    <div>
+                        <button onclick="uploadCard()" id="uploadbutton">Upload</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </div>
@@ -57,10 +74,35 @@
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);
                 document.getElementById("Participant").innerHTML = userdata.participant;
+                document.getElementById("uploadbutton").disabled = true;
+            } else if (this.readyState == 4 && this.status == 500) {
+                document.getElementById("Participant").innerHTML = "<font color='red'>Please upload your card to your identity</font>";
+                document.getElementById("uploadbutton").disabled = false;
             }
         };
         xhr.send();
         //console.log("User Data: " + userdata.participant);
+    }
+
+    function uploadCard() {
+        var cardfile = document.getElementById("cardfile").files[0];
+        var cardname = document.getElementById("cardname").value;
+        var xhr = new XMLHttpRequest();
+        var walletapi = "https://blockchain.arich-net.com/api/wallet/import";
+        var params = "?name=" + cardname;
+        var formData = new FormData();
+        formData.append('card', cardfile);
+
+        xhr.open("POST", walletapi + params, true);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('X-Access-Token', access_token);
+        xhr.onreadystatechange = function () {
+            //console.log("Ready:" + this.readyState + " | Status: " + this.status);
+            if (this.readyState == 4 && this.status == 204) {
+                getParticipantID();
+            }
+        };
+        xhr.send(formData);
     }
 
     function isEmpty(str) {

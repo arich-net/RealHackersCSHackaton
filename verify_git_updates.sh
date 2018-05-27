@@ -6,18 +6,17 @@
 # Verifiy if there are new updtes on GIT
 
 # Lock the script to avoid parallel execution
-PATH=/opt/hyperledger/.nvm/versions/node/v8.10.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+PATH=/opt/hyperledger/.nvm/versions/node/v8.11.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 LOCKDIR=/tmp/gitupdate-lock
 PIDFILE=${LOCKDIR}/PID
 
 log_message() {
    MESSAGE=$1
-   echo "[`date '+%Y%m%d %X'`] $MESSAGE"
+   echo "[`date '+%Y%m%d %X'`][pid:`echo $$`][compver:`composer -v`] $MESSAGE"
 }
 
 if mkdir "${LOCKDIR}" &>/dev/null; then
   echo "$$" >"${PIDFILE}"
-
   pushd . &>/dev/null
   cd /opt/hyperledger/git/RealHackersCSHackaton
   

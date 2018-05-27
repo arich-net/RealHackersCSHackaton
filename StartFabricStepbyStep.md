@@ -16,7 +16,7 @@ npm uninstall -g composer-playground
 ```
 * Install composer environment
 ```
-npm install -g composer-cli composer-rest-server generator-hyperledger-composer
+npm install -g composer-cli@0.19.5 composer-rest-server@0.19.5 generator-hyperledger-composer@0.19.5
 npm install -g composer-playground
 ```
 * Start Up2Dated Infrastructure
@@ -119,6 +119,10 @@ $ cat /opt/hyperledger/git/RealHackersCSHackaton/npmrc.docker
 ; userconfig /opt/hyperledger/.npmrc
 strict-ssl = false
 ```
+* Create business network definition BNA
+```
+$ composer archive create --sourceType dir --sourceName .
+```
 * Install Composer Business Network with PeerAdmin card
 ```
 $ composer network install -c PeerAdmin@real-hackers-network \
@@ -150,7 +154,7 @@ $ composer participant add -c admin@real-hackers-flow \
    }'
 $ composer identity issue -c admin@real-hackers-flow -f restadmin.card \
    -u restadmin -a "resource:org.hyperledger.composer.system.NetworkAdmin#restadmin"
-$ composer card import -f  restadmin.card
+$ composer card import -f restadmin.card
 ```
 * Start mongo docker interface to store states using loopback-connector
 ```
@@ -160,9 +164,8 @@ $ docker run -d --name mongo --network composer_default -p 27017:27017 mongo
 ```
 $ cat Dockerfile 
 FROM hyperledger/composer-rest-server
-RUN npm config set strict-ssl false && \
-    npm config set cafile=/opt/hyperledger/buildenv-rest/ca_bundle.pem && \
-    npm install --production loopback-connector-mongodb passport-github && \
+RUN npm install --production loopback-connector-mongodb passport-github && \
+    npm install base64-js ieee754 && \
     npm cache clean --force && \
     ln -s node_modules .node_modules
 ```
@@ -228,7 +231,22 @@ $ docker run \
 ```
 $ docker logs -f rest
 ```
-* Add participants
+* Add Bank participants
+```
+$ composer participant add -c admin@real-hackers-flow \
+   -d '{
+      "$class": "org.real.hackers.Bank",
+      "bankId": "bankid0001",
+      "name": "Credit Suisse"
+   }'
+$ composer participant add -c admin@real-hackers-flow \
+   -d '{
+      "$class": "org.real.hackers.Bank",
+      "bankId": "bankid0002",
+      "name": "UBS"
+   }'
+```
+* Add User participants
 ```
 $ composer participant add -c admin@real-hackers-flow \
    -d '{
@@ -237,7 +255,8 @@ $ composer participant add -c admin@real-hackers-flow \
       "email": "arich.net@gmail.com",
       "firstName": "Ariel",
       "lastName": "Vasquez",
-      "userGroup": "peerAdmin"
+      "userGroup": "peerAdmin",
+      "bank": "org.real.hackers.Bank#bankid0001"
    }'
 $ composer identity issue -u arich-net -a org.real.hackers.User#arich-net -c admin@real-hackers-flow 
 $ composer card import -f arich-net@real-hackers-flow.card
@@ -249,7 +268,8 @@ $ composer participant add -c admin@real-hackers-flow \
       "email": "fdiergardt@gmx.de",
       "firstName": "Fabian",
       "lastName": "Diergart",
-      "userGroup": "peerAdmin"
+      "userGroup": "peerAdmin",
+      "bank": "org.real.hackers.Bank#bankid0001"
    }'
 $ composer identity issue -u FabianDi -a org.real.hackers.User#FabianDi -c admin@real-hackers-flow 
 $ composer card import -f FabianDi@real-hackers-flow.card
@@ -281,5 +301,14 @@ The connection to the network was successfully tested: real-hackers-flow
 $ composer card export -c arich-net@real-hackers-flow -f arich-net@real-hackers-flow.card
 $ composer card export -c FabianDi@real-hackers-flow -f FabianDi@real-hackers-flow.card
 ```
+* Make ~/.composer read/write for ALL
+```
+$ chmod -R 777 ~/.composer
+```
 * Import credential files into wallets using explorer (api/wallet/import)
+* Start playground and publish it on 8080
+```
+docker run --name composer-playground --publish 8080:8080 --detach hyperledger/composer-playground
+```
+
 
