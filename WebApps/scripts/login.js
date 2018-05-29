@@ -1,14 +1,12 @@
-var access_token = "";
-
-function isEmpty(str) {
-      return (!str || 0 === str.length);
-  }
+function isEmpty(token_str) {
+    return (!token_str || 0 === token_str.length);
+}
 
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
@@ -25,17 +23,11 @@ function verifySessionToken() {
 
     if (isEmpty(myCookie)) {
         // do cookie doesn't exist stuff;
-        window.location.replace("Login.htm");
+        return false
     }
     else {
-        //alert("Cookie: " + myCookie);
         var pivot = myCookie.match(/.*:([^\.]*).*/);
-        access_token = pivot[1];
-        setUserInterface();
-        //document.getElementById("Participant").innerHTML = getParticipantID();
+        var access_token = pivot[1];
+        return access_token;
     }
 }
-
-window.onload = function() {
-    verifySessionToken();
-};
