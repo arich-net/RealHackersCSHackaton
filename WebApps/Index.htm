@@ -13,7 +13,9 @@
         <div class="jumbotron jumbotron-fluid">
             <h1 class="display-4">Real Hackers app overview</h1>
             <hr class="my-4">
-            <p class="lead">Welcome <span id="Participant"></span></p>
+            <p class="lead">Welcome
+                <span id="Participant"></span>
+            </p>
         </div>
         <div class="card-columns">
             <div class="card card text-white bg-info mb-3">
@@ -34,17 +36,16 @@
                 <div class="card-body">
                     <h4 class="card-title">Add card</h4>
                     <p class="card-text">Upload your participant card to our blockchain.</p>
-                    <div>
-                        <label for="file">Choose card to upload</label>
-                        <input type="file" id="cardfile" name="cardfile" multiple />
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="cardfile">
+                            <label class="custom-file-label" for="cardfile">Choose card</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button onclick="uploadCard()" class="btn btn-outline-secondary" type="button">Upload</button>
+                        </div>
                     </div>
-                    <div>
-                        <label for="cardname">Card name</label>
-                        <input type="input" id="cardname" name="cardname" autocomplete="on" />
-                    </div>
-                    <div>
-                        <button onclick="uploadCard()" id="uploadbutton">Upload</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -86,7 +87,7 @@
 
     function uploadCard() {
         var cardfile = document.getElementById("cardfile").files[0];
-        var cardname = document.getElementById("cardname").value;
+        var cardname = cardfile.name;
         var xhr = new XMLHttpRequest();
         var walletapi = "https://blockchain.arich-net.com/api/wallet/import";
         var params = "?name=" + cardname;
