@@ -7,7 +7,7 @@
     <title>Blockchain - client view</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <style>
-        .loader {
+        #loader {
             border: 16px solid #f3f3f3;
             border-top: 16px solid #3498db;
             border-radius: 50%;
@@ -30,7 +30,7 @@
 <body>
     <div class="container">
         <h1 class="display-4">Mortage online</h1>
-        <div class="loader" id="loadAnimation" style="display:none"></div>
+        <div id="loader" style="display:none"></div>
         <hr class="my-4">
         <form>
             <div class="form-group">
@@ -88,18 +88,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="scripts/login.js"></script>
     <script>
-        var sessionToken;
-        window.onload = function () {
-            var sessionToken = verifySessionToken();
-            if (sessionToken == false) {
-                //window.location.replace("Login.htm");
-            }
-        };
+        $(document).ready(function () {
+            var sessionToken;
+            window.onload = function () {
+                var sessionToken = verifySessionToken();
+                if (sessionToken == false) {
+                    window.location.replace("Login.htm");
+                }
+            };
 
-        $("form").submit(function (event) {
-            event.preventDefault();
-            document.getElementById('loadAnimation').style = "position: absolute;left: 50%;top: 50%;"
+            $("form").submit(function (event) {
+                event.preventDefault();
+                $('#loader').css({"position": "absolute" ,"left": "50%", "top": "50%"});
+            });
         });
+
     </script>
 
 
