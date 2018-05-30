@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Real hackers</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .min-50 {
+            height: 50%;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid min-50" id="csMap"></div>
+    <div class="container-fluid min-50" id="csTable">
+        <div class="modal fade" id="signModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        Modal body..
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-sm dt-responsive" id="detailData" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Property</th>
+                            <th scope="col">Current Owner</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Building year</th>
+                            <th scope="col">Edit</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script type="text/javascript" src="data/data.js"></script>
+    <script>
+        $(document).ready(function () {
+            var csMap = L.map('csMap');
+            var stdStlye = {
+                "radius": 5,
+                "fillColor": "#c32121",
+                "color": "#c32121",
+                "weight": 1,
+                "fillOpacity": 0.8
+            };
+            var url = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png';
+            var tileLayer = L.tileLayer(url, {
+                'attribution': null,
+                'detectRetina': false,
+                'noWrap': false
+            });
+            tileLayer.addTo(csMap);
+            csMap.setView([47.35668, 8.51476], 13);
+            var mapJson = createGeoJson(data);
+            L.geoJSON(mapJson, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, stdStlye);
+                }
+            }).addTo(csMap);
+
+            var table = $('#detailData').DataTable({
+                "data": data,
+                "paging": false,
+                "scrollY": '300',
+                "scrollX": false,
+                "scrollColapse": true,
+                "columns": [{
+                        "data": 'property'
+                    },
+                    {
+                        "data": 'owner'
+                    },
+                    {
+                        "data": 'address'
+                    },
+                    {
+                        "data": 'description'
+                    },
+                    {
+                        "data": 'building_year'
+                    },
+                    {
+                        "data": 'edit',
+                        "defaultContent": '<button type="button" class="btn btn-secondary btn-sm">Sign</button>'
+                    }
+                ],
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": -1
+                }]
+            });
+
+            $('#detailData tbody').on('click', 'button', function () {
+                var row = table.row($(this).parents('tr')).data();
+                $('#signModal').modal('show');
+                console.log(row);
+            });
+
+            $('#detailData tbody').on('click', 'tr', function () {
+                var row = table.row(this).data();
+                csMap.setView([row.latitude, row.longitude], 13);
+                console.log(row);
+            });
+
+            $(window).resize(function () {
+                table.redraw();
+                calcHeight();
+            });
+
+            function createGeoJson(jsonObject) {
+                var geoJson = [];
+                $(jsonObject).each(function () {
+                    var feature = {
+                        "type": "Feature",
+                        "properties": {
+                            "address": this.address
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [this.longitude, this.latitude]
+                        }
+                    };
+                    geoJson.push(feature)
+                });
+                return geoJson;
+            }
+
+            function calcHeight() {
+                var tableHeight = $('#csTable').height();
+                var tableWHeight = $('.dataTables_wrapper').height();
+                var scrollHeight = $('.dataTables_scrollBody').height();
+                if (tableWHeight > tableHeight) {
+                    var diff = tableWHeight - scrollHeight;
+                    $('.dataTables_scrollBody').height(tableHeight - diff - 1);
+                }
+            }
+
+            calcHeight();
+        });
+    </script>
+</body>
