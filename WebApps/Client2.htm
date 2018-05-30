@@ -6,13 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blockchain - client view</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Mortage online</h1>
-    </div>
     <div class="container">
+        <h1 class="display-4">Mortage online</h1>
+        <div class="loader" id="loadAnimation" style="display:none"></div>
+        <hr class="my-4">
         <form>
             <div class="form-group">
                 <label for="fname">First Name</label>
@@ -44,7 +63,7 @@
                         <label class="custom-file-label" for="credit">Choose file</label>
                     </div>
                     <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
                     </div>
                 </div>
             </div>
@@ -57,7 +76,7 @@
                         <label class="custom-file-label" for="subject">Choose file</label>
                     </div>
                     <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
+                        <button class="btn btn-outline-secondary" type="button">Upload</button>
                     </div>
                 </div>
             </div>
@@ -73,10 +92,15 @@
         window.onload = function () {
             var sessionToken = verifySessionToken();
             if (sessionToken == false) {
-                window.location.replace("Login.htm");
+                //window.location.replace("Login.htm");
             }
         };
+
+        $("form").submit(function (event) {
+            event.preventDefault();
+            document.getElementById('loadAnimation').style = "position: absolute;left: 50%;top: 50%;"
+        });
     </script>
 
 
-</body >
+</body>
