@@ -248,6 +248,7 @@ $ composer participant add -c admin@real-hackers-flow \
 ```
 * Add User participants
 ```
+# Ariel Vasquez
 $ composer participant add -c admin@real-hackers-flow \
    -d '{
       "$class": "org.real.hackers.User",
@@ -260,7 +261,7 @@ $ composer participant add -c admin@real-hackers-flow \
    }'
 $ composer identity issue -u arich-net -a org.real.hackers.User#arich-net -c admin@real-hackers-flow 
 $ composer card import -f arich-net@real-hackers-flow.card
-
+# Fabian Diergart
 $ composer participant add -c admin@real-hackers-flow \
    -d '{
       "$class": "org.real.hackers.User",
@@ -273,6 +274,19 @@ $ composer participant add -c admin@real-hackers-flow \
    }'
 $ composer identity issue -u FabianDi -a org.real.hackers.User#FabianDi -c admin@real-hackers-flow 
 $ composer card import -f FabianDi@real-hackers-flow.card
+# Ghosh Aniruddha
+$ composer participant add -c admin@real-hackers-flow \
+   -d '{
+      "$class": "org.real.hackers.User",
+      "userId": "ani-gh-22",
+      "email": "ronyzurich@gmail.com",
+      "firstName": "Aniruddha",
+      "lastName": "Ghosh",
+      "userGroup": "peerUser",
+      "bank": "org.real.hackers.Bank#bankid0001"
+   }'
+$ composer identity issue -u ani-gh-22 -a org.real.hackers.User#ani-gh-22 -c admin@real-hackers-flow 
+$ composer card import -f ani-gh-22@real-hackers-flow.card
 ```
 * Test one of the participants
 ```
@@ -300,6 +314,7 @@ The connection to the network was successfully tested: real-hackers-flow
 ```
 $ composer card export -c arich-net@real-hackers-flow -f arich-net@real-hackers-flow.card
 $ composer card export -c FabianDi@real-hackers-flow -f FabianDi@real-hackers-flow.card
+$ composer card export -c ani-gh-22@real-hackers-flow -f ani-gh-22@real-hackers-flow.card
 ```
 * Make ~/.composer read/write for ALL
 ```

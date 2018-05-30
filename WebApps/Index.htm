@@ -43,7 +43,7 @@
                             <label class="custom-file-label" for="cardfile">Choose card</label>
                         </div>
                         <div class="input-group-append">
-                            <button onclick="uploadCard()" class="btn btn-outline-secondary" type="button">Upload</button>
+                            <button onclick="uploadCard()" class="btn btn-outline-secondary" id="uploadcard" type="button">Upload</button>
                         </div>
                     </div>
 
@@ -87,10 +87,10 @@
             if (this.readyState == 4 && this.status == 200) {
                 userdata = JSON.parse(this.responseText);
                 document.getElementById("Participant").innerHTML = userdata.participant;
-                document.getElementById("uploadbutton").disabled = true;
+                document.getElementById("uploadcard").disabled = true;
             } else if (this.readyState == 4 && this.status == 500) {
                 document.getElementById("Participant").innerHTML = "<font color='red'>Please upload your card to your identity</font>";
-                document.getElementById("uploadbutton").disabled = false;
+                document.getElementById("uploadcard").disabled = false;
             }
         };
         xhr.send();
@@ -98,7 +98,7 @@
 
     function uploadCard() {
         var cardfile = document.getElementById("cardfile").files[0];
-        var cardname = cardfile.name;
+        var cardname = cardfile.name.replace(/\.\w*/i, "");
         var xhr = new XMLHttpRequest();
         var walletapi = "https://blockchain.arich-net.com/api/wallet/import";
         var params = "?name=" + cardname;
