@@ -91,7 +91,7 @@
         $(document).ready(function () {
             var sessionToken;
             window.onload = function () {
-                var sessionToken = verifySessionToken();
+                sessionToken = verifySessionToken();
                 if (sessionToken == false) {
                     window.location.replace("Login.htm");
                 }
@@ -99,8 +99,35 @@
 
             $("form").submit(function (event) {
                 event.preventDefault();
-                $('#loader').css({"position": "absolute" ,"left": "50%", "top": "50%"});
+                $('#loader').css({ "position": "absolute", "left": "50%", "top": "50%" });
+                sendForm();
             });
+
+            function sendForm() {
+                var uniqueId = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+                
+                var posting = $.ajax({
+                    type: 'post',
+                    url: "https://blockchain.arich-net.com/api/Customer",
+                    data: {
+                        "$class": "org.real.hackers.Customer",
+                        "customerId": uniqid,
+                        "firstName": $("#fname").val(),
+                        "lastName": $("#lname").val(),
+                        "dateOfBirth": "1979-03-16T20:17:54.264Z"
+                    },
+                    contentType: 'json',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('X-Access-Token', sessionToken);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
         });
 
     </script>

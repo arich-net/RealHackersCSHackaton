@@ -183,7 +183,7 @@
     xhr.open("POST", customerapi, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.setRequestHeader('Accept', 'application/json');
-    xhr.setRequestHeader('X-Access-Token', access_token);
+    xhr.setRequestHeader('X-Access-Token', sessionToken);
     user = {
       "$class": "org.real.hackers.Customer",
       "customerId": uniqid,
@@ -200,7 +200,7 @@
       var applicationapi = "https://blockchain.arich-net.com/api/Application";
       xhr2.open("POST", applicationapi, true);
       xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-      xhr2.setRequestHeader('X-Access-Token', access_token);
+      xhr2.setRequestHeader('X-Access-Token', sessionToken);
       application = {
         "$class": "org.real.hackers.Application",
         "appId": "app-" + uniqid, // Auto generate ID
