@@ -56,12 +56,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </body>
 
-</html>
+</html>>
+<script src="scripts/login.js"></script>
 <script>
-    var access_token = "";
+    var accessToken = "";
+    window.onload = function () {
+        var accessToken = verifySessionToken();
+        if (accessToken == false) {
+            window.location.replace("Login.htm");
+        }
+        else{
+            getParticipantID();
+        }
+    };
+
 
     function getParticipantID() {
-        console.log("Access_Token: " + access_token);
+        console.log("Access_Token: " + accessToken);
         var processed = false;
         var userdata = "";
         var xhr = new XMLHttpRequest();
@@ -82,7 +93,6 @@
             }
         };
         xhr.send();
-        //console.log("User Data: " + userdata.participant);
     }
 
     function uploadCard() {
@@ -96,53 +106,13 @@
 
         xhr.open("POST", walletapi + params, true);
         xhr.setRequestHeader('Accept', 'application/json');
-        xhr.setRequestHeader('X-Access-Token', access_token);
+        xhr.setRequestHeader('X-Access-Token', accessToken);
         xhr.onreadystatechange = function () {
-            //console.log("Ready:" + this.readyState + " | Status: " + this.status);
             if (this.readyState == 4 && this.status == 204) {
                 getParticipantID();
             }
         };
         xhr.send(formData);
     }
-
-    function isEmpty(str) {
-        return (!str || 0 === str.length);
-    }
-
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
-    function verifySessionToken() {
-        var myCookie = getCookie("access_token");
-
-        if (isEmpty(myCookie)) {
-            // do cookie doesn't exist stuff;
-            window.location.replace("Login.htm");
-        }
-        else {
-            //alert("Cookie: " + myCookie);
-            var pivot = myCookie.match(/.*:([^\.]*).*/);
-            access_token = pivot[1];
-            getParticipantID();
-        }
-    }
-
-    window.onload = function () {
-        verifySessionToken();
-    };
 
 </script>
