@@ -88,15 +88,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="scripts/login.js"></script>
     <script>
-        $(document).ready(function () {
-            var sessionToken;
-            window.onload = function () {
-                sessionToken = verifySessionToken();
-                if (sessionToken == false) {
-                    window.location.replace("Login.htm");
-                }
-            };
+        var sessionToken;
+        window.onload = function () {
+            sessionToken = verifySessionToken();
+            if (sessionToken == false) {
+                window.location.replace("Login.htm");
+            }
+        };
 
+        $(document).ready(function () {
             $("form").submit(function (event) {
                 event.preventDefault();
                 $('#loader').css({ "position": "absolute", "left": "50%", "top": "50%" });
