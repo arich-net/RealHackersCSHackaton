@@ -126,6 +126,7 @@
 
                 var url = "https://blockchain.arich-net.com/api/Customer";
                 xhr = createRequest(url);
+                console.log(user);
                 xhr.send(JSON.stringify(user));
                 xhr.onloadend = function () {
                     var url = "https://blockchain.arich-net.com/api/Application";
@@ -136,11 +137,12 @@
                         "customer": "org.real.hackers.Customer#" + uniqueId,
                         "creditHistory": "none",
                         "propertyName": $('#address').val(),
-                        "fundingRequest": parseInt($('loan2').val()),
+                        "fundingRequest": parseInt($('#loan2').val()),
                         "duration": 1,
                         "signatures": [],
                         "applicationStatus": 0
                     }
+                    console.log(application);
                     xhr2.send(JSON.stringify(application));
                 }
             }
