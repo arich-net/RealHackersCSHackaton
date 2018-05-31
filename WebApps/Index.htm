@@ -62,7 +62,7 @@
 <script>
     var accessToken = "";
     window.onload = function () {
-        var accessToken = verifySessionToken();
+        accessToken = verifySessionToken();
         console.log("Access_Token here: " + accessToken);
         if (accessToken == false) {
             window.location.replace("Login.htm");
