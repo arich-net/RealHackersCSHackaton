@@ -105,30 +105,31 @@
                 $('#loader').hide();
             });
 
+            function createRequest(url) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                xhr.setRequestHeader('Accept', 'application/json');
+                xhr.setRequestHeader('X-Access-Token', sessionToken);
+                return xhr
+            }
+
             function sendForm() {
                 var uniqueId = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
-                var data = {
-                        "$class": "org.real.hackers.Customer",
-                        "customerId": uniqueId,
-                        "firstName": $("#fname").val(),
-                        "lastName": $("#lname").val(),
-                        "dateOfBirth": "1979-03-16T20:17:54.264Z"
-                    };
-                var posting = $.ajax({
-                    type: 'post',
-                    url: "https://blockchain.arich-net.com/api/Customer",
-                    data: data,
-                    contentType: "json",
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('X-Access-Token', sessionToken);
-                    },
-                    success: function (response) {
-                        console.log(response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
+                var user = {
+                    "$class": "org.real.hackers.Customer",
+                    "customerId": uniqueId,
+                    "firstName": $("#fname").val(),
+                    "lastName": $("#lname").val(),
+                    "dateOfBirth": "1979-03-16T20:17:54.264Z"
+                };    
+                
+                var url = "https://blockchain.arich-net.com/api/Customer";
+                xhr = createRequest(url);
+                xhr.send(JSON.stringify(user));
+                xhr.onloadend = function () {
+                    console.log(xhr.response);
+                }
             }
         });
     </script>
