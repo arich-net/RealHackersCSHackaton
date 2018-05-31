@@ -63,7 +63,6 @@
     var accessToken = "";
     window.onload = function () {
         accessToken = verifySessionToken();
-        console.log("Access_Token here: " + accessToken);
         if (accessToken == false) {
             window.location.replace("Login.htm");
         }
@@ -71,7 +70,6 @@
             getParticipantID();
         }
     };
-
 
     function getParticipantID() {
         console.log("Access_Token: " + accessToken);

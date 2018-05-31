@@ -207,7 +207,7 @@
       <script>
         var accessToken = "";
         window.onload = function () {
-          var accessToken = verifySessionToken();
+          accessToken = verifySessionToken();
           if (accessToken == false) {
             window.location.replace("Login.htm");
           }

@@ -166,7 +166,7 @@
 <script>
   var sessionToken;
   window.onload = function() {
-    var sessionToken = verifySessionToken();
+    sessionToken = verifySessionToken();
     if (sessionToken == false){
       window.location.replace("Login.htm");  
     }
