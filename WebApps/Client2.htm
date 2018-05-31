@@ -118,7 +118,7 @@
                     type: 'post',
                     url: "https://blockchain.arich-net.com/api/Customer",
                     data: JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
+                    contentType: "json",
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-Access-Token', sessionToken);
                     },
