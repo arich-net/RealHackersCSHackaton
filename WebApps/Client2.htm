@@ -88,7 +88,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="scripts/login.js"></script>
     <script>
-        var sessionToken;
+        var sessionToken = false;
         window.onload = function () {
             sessionToken = verifySessionToken();
             if (sessionToken == false) {
@@ -107,18 +107,18 @@
 
             function sendForm() {
                 var uniqueId = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
-                
-                var posting = $.ajax({
-                    type: 'post',
-                    url: "https://blockchain.arich-net.com/api/Customer",
-                    data: {
+                var data = {
                         "$class": "org.real.hackers.Customer",
                         "customerId": uniqueId,
                         "firstName": $("#fname").val(),
                         "lastName": $("#lname").val(),
                         "dateOfBirth": "1979-03-16T20:17:54.264Z"
-                    },
-                    contentType: 'json',
+                    };
+                var posting = $.ajax({
+                    type: 'post',
+                    url: "https://blockchain.arich-net.com/api/Customer",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-Access-Token', sessionToken);
                     },
@@ -131,7 +131,6 @@
                 });
             }
         });
-
     </script>
 
 
