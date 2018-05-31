@@ -122,13 +122,26 @@
                     "firstName": $("#fname").val(),
                     "lastName": $("#lname").val(),
                     "dateOfBirth": "1979-03-16T20:17:54.264Z"
-                };    
-                
+                };
+
                 var url = "https://blockchain.arich-net.com/api/Customer";
                 xhr = createRequest(url);
                 xhr.send(JSON.stringify(user));
                 xhr.onloadend = function () {
-                    console.log(xhr.response);
+                    var url = "https://blockchain.arich-net.com/api/Application";
+                    xhr2 = createRequest(url);
+                    application = {
+                        "$class": "org.real.hackers.Application",
+                        "appId": "app-" + uniqueId,
+                        "customer": "org.real.hackers.Customer#" + uniqueId,
+                        "creditHistory": "none",
+                        "propertyName": $('#address').val(),
+                        "fundingRequest": parseInt($('loan').val()),
+                        "duration": 1,
+                        "signatures": [],
+                        "applicationStatus": 0
+                    }
+                    xhr2.send(JSON.stringify(application));
                 }
             }
         });
