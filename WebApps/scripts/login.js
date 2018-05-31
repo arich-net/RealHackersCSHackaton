@@ -1,5 +1,5 @@
-function isEmpty(token_str) {
-    return (!token_str || 0 === token_str.length);
+function isEmpty(str) {
+    return (!str|| 0 === str.length);
 }
 
 function getCookie(cname) {

@@ -100,7 +100,9 @@
             $("form").submit(function (event) {
                 event.preventDefault();
                 $('#loader').css({ "position": "absolute", "left": "50%", "top": "50%" });
+                $('#loader').show();
                 sendForm();
+                $('#loader').hide();
             });
 
             function sendForm() {
