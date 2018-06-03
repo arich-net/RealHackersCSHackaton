@@ -41,6 +41,8 @@ Starting httpd...
 * Start Firefox and go to the site http://testblockchain.arich-net.com:8000/Index.htm
 ![Firefox][firefox]
 
+* That is all!
+
 [cookie1]: https://raw.githubusercontent.com/arich-net/RealHackersCSHackaton/master/images/local_cookie.png
 [cookie2]: https://raw.githubusercontent.com/arich-net/RealHackersCSHackaton/master/images/local_cookie_2.png
 [firefox]: https://raw.githubusercontent.com/arich-net/RealHackersCSHackaton/master/images/firefox_browser.png
