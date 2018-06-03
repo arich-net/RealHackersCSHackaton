@@ -266,7 +266,15 @@
           var xhr = new XMLHttpRequest();
           //var url = "http://localhost:3000/api/queries/selectBankStatusAll";
           var url = "https://blockchain.arich-net.com/api/queries/selectBankStatusAll";
-          xhr.open("GET", url, true);
+          var urlloc = "json/selectBankStatusAll.json";
+
+          if (accessToken != "local") {
+              xhr.open("GET", url, true);
+          } else {
+              console.log("Running in simulation mode");
+              xhr.open("GET", urlloc, true);
+          }
+
           xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
           xhr.setRequestHeader('X-Access-Token', accessToken);
 

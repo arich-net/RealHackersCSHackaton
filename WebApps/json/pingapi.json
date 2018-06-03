@@ -1,0 +1,5 @@
+{
+    "version": "0.19.5",
+    "participant": "org.real.hackers.User#local-user",
+    "identity": "org.hyperledger.composer.system.Identity#666"
+}

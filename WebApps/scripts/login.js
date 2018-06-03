@@ -23,11 +23,13 @@ function verifySessionToken() {
 
     if (isEmpty(myCookie)) {
         // do cookie doesn't exist stuff;
+        console.log("Oops No access token found");
         return false
     }
     else {
         var pivot = myCookie.match(/.*:([^\.]*).*/);
         var access_token = pivot[1];
+        console.log("Access_Token: " + access_token);
         return access_token;
     }
 }
