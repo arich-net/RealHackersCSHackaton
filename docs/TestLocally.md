@@ -23,8 +23,8 @@
   * Domain: Host-only cookie for given URL
   * Path: /(default)
   * Expiration: (some day in the future)
-  ![Create cookie 1][cookie1]
-  ![Create cookie 1][cookie1]
+  [Create cookie 1][cookie1]
+  [Create cookie 1][cookie1]
 
 * Start with python the script _webserver.py_
 ```
@@ -37,7 +37,7 @@ Starting httpd...
 ```
 
 * Start Firefox and go to the site http://testblockchain.arich-net.com:8000/Index.htm
-![firefox][firefox]
+[firefox][firefox]
 
 [cookie1]: https://raw.githubusercontent.com/arich-net/RealHackersCSHackaton/master/images/local_cookie.png
 [cookie2]: https://raw.githubusercontent.com/arich-net/RealHackersCSHackaton/master/images/local_cookie_2.png
