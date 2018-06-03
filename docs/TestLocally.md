@@ -23,7 +23,9 @@
   * Domain: Host-only cookie for given URL
   * Path: /(default)
   * Expiration: (some day in the future)
+
 ![Create cookie 1][cookie1]
+
 ![Create cookie 1][cookie1]
 
 * Start with python the script _webserver.py_
