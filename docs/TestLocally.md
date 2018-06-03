@@ -27,14 +27,15 @@
   ![Create cookie 1][cookie1]
 
 * Start with python the script _webserver.py_
-  ```
+```
 $ python webserver.py 8000
 Starting httpd...
 127.0.0.1 - - [03/Jun/2018 21:42:43] "GET /json/pingapi.json HTTP/1.1" 200 -
 127.0.0.1 - - [03/Jun/2018 22:10:42] "GET /Bank.htm HTTP/1.1" 200 -
 127.0.0.1 - - [03/Jun/2018 22:10:42] "GET /scripts/login.js HTTP/1.1" 200 -
 127.0.0.1 - - [03/Jun/2018 22:10:42] "GET /json/selectBankStatusAll.json HTTP/1.1" 200 -
-  ```
+```
+
 * Start Firefox and go to the site http://testblockchain.arich-net.com:8000/Index.htm
 ![firefox][firefox]
 
