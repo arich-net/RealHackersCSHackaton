@@ -2,7 +2,7 @@ var sessionToken = false;
 window.onload = function () {
     sessionToken = verifySessionToken();
     if (sessionToken == false) {
-        //window.location.replace("Login.htm");
+        window.location.replace("Login.htm");
     }
 };
 
