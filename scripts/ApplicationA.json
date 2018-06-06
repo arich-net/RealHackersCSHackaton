@@ -6,6 +6,8 @@
   "propertyName": "New Mansio Somewhere",
   "fundingRequest": 30000,
   "duration": 1,
+  "latitude": 47.35653045351718,
+  "longitud": 8.513783976513592,
   "signatures": [],
   "applicationStatus": 0
 }

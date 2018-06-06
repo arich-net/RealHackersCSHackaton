@@ -34,6 +34,38 @@ function execValidation(validation) {
 
 }
 
+function execMortageAssignement(mortage) {
+    // Execute Mortgage when application have been validated
+    var application = mortage.application;
+    var bank = mortage.bank;
+    var user = mortage.user;
+    
+    if (application.signatures.length >= 3) {
+        application.applicationStatus = 3;
+    }
+    // Update the asset with the new value.
+
+    // Get the asset registry for the asset.
+    return getAssetRegistry('org.real.hackers.Application')
+        .then(function (assetRegistry) {
+
+            // Update the asset in the asset registry.
+            return assetRegistry.update(validation.application);
+
+        }) 
+        .then(function () {
+
+            // Emit an event for the modified asset.
+            //var event = getFactory().newEvent('org.real.hackers', 'ApplicationSend');
+            //event.asset = tx.asset;
+            //event.oldValue = oldValue;
+            //event.newValue = tx.newValue;
+            //emit(event);
+
+        });
+
+}
+
 /**
  * Sample transaction processor function.
  * @param {org.real.hackers.SignaturesCompletedTransaction} signaturesCompleted Check signatures.

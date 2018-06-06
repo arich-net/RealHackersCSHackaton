@@ -6,6 +6,8 @@
   "propertyName": "New Mansio Zurich",
   "fundingRequest": 300000,
   "duration": 2,
+  "latitude": 37.31200000000001,
+  "longitud": -121.96600000000001,
   "signatures": [],
   "applicationStatus": 0
 }

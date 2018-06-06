@@ -1,0 +1,5 @@
+{
+  "$class": "org.real.hackers.Bank",
+  "bankId": "bankid0002",
+  "name": "UBS"
+}

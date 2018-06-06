@@ -14,13 +14,15 @@ participant User identified by userId {
 
 asset Application identified by appId {
   o String appId
-  --> Customer customer
   o String creditHistory
   o String propertyName
   o Double fundingRequest
   o Integer duration
+  o Double latitude optional
+  o Double longitud optional
   o Signature[] signatures optional
   o Integer applicationStatus
+  --> Customer customer
 }
 
 asset MortgageContract identified by mortgageId {
@@ -62,6 +64,12 @@ transaction Validation {
 
 transaction ContractAssignement {
   o Double moneyAmount
+}
+
+transaction MortageAssignement {
+  --> Application application
+  --> Bank bank
+  --> User user optional
 }
   
 transaction SignaturesCompletedTransaction {

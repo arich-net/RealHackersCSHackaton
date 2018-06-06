@@ -1,6 +1,6 @@
 {
   "name": "real-hackers-flow",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Real Hackers Hackaton CS",
   "scripts": {
     "test": "mocha --recursive"
