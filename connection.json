@@ -4,19 +4,19 @@
     "version": "1.0.0",
     "peers": {
         "peer0.org1.example.com": {
-            "url": "grpc://127.0.0.1:7051",
-            "eventUrl": "grpc://127.0.0.1:7053"
+            "url": "grpc://192.168.130.14:7051",
+            "eventUrl": "grpc://192.168.130.14:7053"
         }
     },
     "certificateAuthorities": {
         "ca.org1.example.com": {
-            "url": "http://127.0.0.1:7054",
+            "url": "http://192.168.130.14:7054",
             "caName": "ca.org1.example.com"
         }
     },
     "orderers": {
         "orderer.example.com": {
-            "url": "grpc://127.0.0.1:7050"
+            "url": "grpc://192.168.130.14:7050"
         }
     },
     "organizations": {
