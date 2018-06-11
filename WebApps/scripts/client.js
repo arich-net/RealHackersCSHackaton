@@ -13,6 +13,9 @@ $(document).ready(function () {
         uiLibrary: 'bootstrap4',
         format: 'dd.mm.yyyy'
     });
+
+    var longitude = 0;
+    var latitude = 0;
     var esriUrl = "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/";
     var addresses = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -53,6 +56,8 @@ $(document).ready(function () {
             { "f": "json", 'magicKey': suggestions.magicKey });
         request.done(function (data){
             var position = data.candidates[0];
+            latitude = position.location.y;
+            longitude = position.location.x;
         });
     });
 
@@ -114,7 +119,9 @@ $(document).ready(function () {
                 "customer": "org.real.hackers.Customer#" + uniqueId,
                 "creditHistory": "none",
                 "propertyName": $('#address').val(),
-                "fundingRequest": parseInt($('#loan2').val()),
+                "fundingRequest": $('#loan2').val(),
+                "latitude": latitude,
+                "longitude": longitude,
                 "duration": 1,
                 "signatures": [],
                 "applicationStatus": 0
