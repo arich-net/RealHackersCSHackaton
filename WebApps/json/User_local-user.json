@@ -1,0 +1,1 @@
+{"$class":"org.real.hackers.User","userId":"local-user","email":"local.user@credit-suisse.com","firstName":"Local","lastName":"Account","userGroup":"peerAdmin","bank":"resource:org.real.hackers.Bank#bankid0001"}

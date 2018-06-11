@@ -19,7 +19,7 @@ asset Application identified by appId {
   o Double fundingRequest
   o Integer duration
   o Double latitude optional
-  o Double longitud optional
+  o Double longitude optional
   o Signature[] signatures optional
   o Integer applicationStatus
   --> Customer customer
@@ -70,6 +70,7 @@ transaction MortageAssignement {
   --> Application application
   --> Bank bank
   --> User user optional
+  o String paymentSchedule
 }
   
 transaction SignaturesCompletedTransaction {

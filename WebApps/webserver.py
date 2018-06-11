@@ -2,6 +2,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import re
 import os.path
+import time
 
 class S(BaseHTTPRequestHandler):
     def _set_headers_ok(self):
@@ -19,7 +20,8 @@ class S(BaseHTTPRequestHandler):
         self.send_response(500)
         self.end_headers()
 
-    def do_GET(self):        
+    def do_GET(self):    
+        time.sleep(1)    
         fname = "." + self.path
         if os.path.isfile(fname):
             self._set_headers_ok()
@@ -33,9 +35,10 @@ class S(BaseHTTPRequestHandler):
         self._set_headers_ok()
         
     def do_POST(self):
+        time.sleep(1)
         # Doesn't do anything with posted data
         self._set_headers_ok()
-        self.wfile.write("<html><body><h1>POST!</h1></body></html>")
+        self.wfile.write("{ \"acknolowedged\": true }")
 
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)

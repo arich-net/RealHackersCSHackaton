@@ -16,7 +16,7 @@ npm uninstall -g composer-playground
 ```
 * Install composer environment
 ```
-npm install -g composer-cli@0.19.5 composer-rest-server@0.19.5 generator-hyperledger-composer@0.19.5
+npm install -g composer-cli@0.19.7 composer-rest-server@0.19.7 generator-hyperledger-composer@0.19.7
 npm install -g composer-playground
 ```
 * Start Up2Dated Infrastructure
@@ -209,6 +209,12 @@ restadmin@real-hackers-flow
 * Make ~/.composer read/write for ALL
 ```
 $ chmod -R 777 ~/.composer
+```
+* Change connection settings for rest admin composer card
+```
+$ cat $HOME/.composer/cards/restadmin@real-hackers-flow/connection.json \
+    | sed -e 's/127.0.0.1/192.168.130.14/g' > /tmp/connection.json \
+    && cp -p /tmp/connection.json $HOME/.composer/cards/restadmin@real-hackers-flow/
 ```
 * Run docker image my-composer-rest-server
 ```
