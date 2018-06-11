@@ -119,7 +119,7 @@ $(document).ready(function () {
                 "customer": "org.real.hackers.Customer#" + uniqueId,
                 "creditHistory": "none",
                 "propertyName": $('#address').val(),
-                "fundingRequest": $('#loan2').val(),
+                "fundingRequest": parseInt($('#loanInput').val()),
                 "latitude": latitude,
                 "longitude": longitude,
                 "duration": 1,
