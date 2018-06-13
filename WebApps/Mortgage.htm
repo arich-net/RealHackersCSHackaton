@@ -29,9 +29,9 @@
             console.log("Get Mortages for the Bank ID: " + bankid);
             var xhr = new XMLHttpRequest();
             //var url = "http://localhost:3000/api/queries/selectBankStatusAll";            
-            var getparams = encodeURIComponent("bank=resource:org.real.hackers.Bank#" + bankid);
-            var url = "https://blockchain.arich-net.com/api/queries/selectMortgagebyBank?" + getparams;
-            var urlloc = "json/selectMortgagebyBank.json?" + getparams;
+            var getparams = encodeURIComponent("resource:org.real.hackers.Bank#" + bankid);
+            var url = "https://blockchain.arich-net.com/api/queries/selectMortgagebyBank?bank=" + getparams;
+            var urlloc = "json/selectMortgagebyBank.json?bank=" + getparams;
 
             console.log("URL " + url);
             console.log("URL2 " + urlloc);

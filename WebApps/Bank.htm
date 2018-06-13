@@ -273,8 +273,8 @@
           if (table) table.parentNode.removeChild(table);
           var xhr = new XMLHttpRequest();
           //var url = "http://localhost:3000/api/queries/selectBankStatusAll";
-          var url = "https://blockchain.arich-net.com/api/queries/selectBankStatusAll";
-          var urlloc = "json/selectBankStatusAll.json";
+          var url = "https://blockchain.arich-net.com/api/queries/selectBankStatusReady";
+          var urlloc = "json/selectBankStatusReady.json";
 
           if (accessToken != "local") {
               xhr.open("GET", url, true);
