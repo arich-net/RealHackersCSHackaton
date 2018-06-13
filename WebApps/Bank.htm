@@ -228,7 +228,7 @@
             xhr2.open("POST", urlapi, true);
           } else {
             console.log("Running in simulation mode");
-            xhr2.open("GET", urlloc, true);
+            xhr2.open("POST", urlloc, true);
           }
 
           xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -304,13 +304,42 @@
         }
 
         function applyToMortgage(appid, userid, bankid) {
-          console.log("Applyng to Mortgage appid: " + appid);
-          console.log("Applyng to Mortgage userid: " + userid);
-          console.log("Applyng to Mortgage bankid: " + bankid);
+          console.log("Applying to Mortgage appid: " + appid);
+          console.log("Applying to Mortgage userid: " + userid);
+          console.log("Applying to Mortgage bankid: " + bankid);
+
+          document.getElementById('loadAnimation').style = "position: absolute;left: 50%;top: 50%;"
+          //alert("Value:" + appID);
+          var xhr = new XMLHttpRequest();
+          var urlapi = "https://blockchain.arich-net.com/api/MortageAssignement";
+          var urlloc = "json/MortageAssignement.json";
+
+          if (accessToken != "local") {
+            xhr.open("POST", urlapi, true);
+          } else {
+            console.log("Running in simulation mode");
+            xhr.open("POST", urlloc, true);
+          }
+
+          xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+          xhr.setRequestHeader('X-Access-Token', accessToken);
+          mortgageassignment = {
+              "$class": "org.real.hackers.MortageAssignement",
+              "application": "org.real.hackers.Application#" + appid,
+              "bank": "org.real.hackers.Bank#" + bankid,
+              "user": "org.real.hackers.User#" + userid,
+              "paymentSchedule": "Monthly"
+          }
+          xhr.send(JSON.stringify(mortgageassignment));
+          xhr.onloadend = function () {
+            document.getElementById("loadAnimation").style = "display:none;";
+            setUserInterface();
+          };
         }
 
         function createTable(data) {
           var globalCounter = 0;
+          var applicationid;
           //var tbody = document.getElementById('tBody');
           var tbody = document.createElement("table");
           tbody.id = "appList";
@@ -347,9 +376,9 @@
             tr = tbody.insertRow(-1);
             var isTrue = false;
             for (var j = 0; j < col.length; j++) {
-              var applicationid = data[i][col[j]];
               var tabCell = tr.insertCell(-1);
               if (j == 0) {
+                applicationid = data[i][col[j]];
                 tabCell.innerHTML = "<input type='submit' value='Submit' onClick=validateApplication('" + applicationid + "') />";
               }
               else {

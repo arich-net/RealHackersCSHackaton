@@ -24,7 +24,7 @@ function execValidation(validation) {
         })
         .then(function () {
             if (application.applicationStatus == 3) {
-                var event = getFactory().newEvent('org.real.hackers', 'SignaturesCompletedEvent');
+                var event = getFactory().newEvent('org.real.hackers', 'SignaturesCompleted');
                 console.log("Arich Log Signatures Completed Emit Event");
                 emit(event);
             }

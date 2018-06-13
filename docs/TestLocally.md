@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* Python 2.X
+* Python 3.X
 * Update hosts as follows
   * Linux (/etc/hosts)
   ```

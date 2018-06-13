@@ -1,0 +1,8 @@
+{
+  "$class": "org.real.hackers.MortageAssignement",
+  "application": "org.real.hackers.Application#app0002",
+  "bank": "org.real.hackers.Bank#bankid0002",
+  "user": "org.real.hackers.User#arich-net",
+  "paymentSchedule": "Monthly"
+}
+

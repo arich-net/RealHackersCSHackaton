@@ -21,9 +21,23 @@ query selectBankStatusAll {
       SELECT org.real.hackers.Application
 }
 
+query selectBankStatusReady {
+  description: "Select AllBank Approved Ready with status less than 3"
+  statement:
+      SELECT org.real.hackers.Application
+        WHERE (applicationStatus <= 3)
+}
+
 query selectBankStatusAllOrdered {
   description: "Select AllBank Approved"
   statement:
       SELECT org.real.hackers.Application
          ORDER BY applicationStatus
+}
+
+query selectMortgagebyBank {
+  description: "Select Mortgages assigned to a specific bank"
+  statement:
+      SELECT org.real.hackers.MortgageContract
+        WHERE (bank == _$bank)
 }

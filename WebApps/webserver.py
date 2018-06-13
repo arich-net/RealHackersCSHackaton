@@ -1,19 +1,24 @@
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-import SocketServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import socketserver
 import re
 import os.path
 import time
+import json
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
+from urllib.parse import unquote
 
 class S(BaseHTTPRequestHandler):
     def _set_headers_ok(self):
+        parsed = urlparse(self.path)
         self.send_response(200)
-        if re.match('.*\.htm$', self.path):
+        if re.match(r'.*\.htm$', parsed.path):
             self.send_header('Content-Type', 'text/html')
-        elif re.match('.*\.json$', self.path):
+        elif re.match(r'.*\.json$', parsed.path):
             self.send_header('Content-Type', 'application/json')
         else:
             self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', os.path.getsize("." + self.path))
+        self.send_header('Content-Length', os.path.getsize("." + parsed.path))
         self.end_headers()
 
     def _set_headers_nok(self):
@@ -21,24 +26,40 @@ class S(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):    
-        time.sleep(1)    
-        fname = "." + self.path
+        time.sleep(1)
+        parsed = urlparse(self.path)
+        if parsed.query:
+            print('----------------------------------')
+            print("** GET parameters received:")
+            print('Query:' + json.dumps(parse_qs(unquote(parsed.query)))) 
+            print('----------------------------------')
+        fname = "." + parsed.path
         if os.path.isfile(fname):
             self._set_headers_ok()
             page_obj = open(fname, 'r') 
-            self.wfile.write(page_obj.read())
+            self.wfile.write(bytes(page_obj.read().encode('utf-8')))
         else:
             self._set_headers_nok()
-            self.wfile.write("<html><body><h1>Page do not exist</h1></body></html>")
+            self.wfile.write(bytes("<html><body><h1>Page do not exist</h1></body></html>".encode('utf-8')))
 
     def do_HEAD(self):
         self._set_headers_ok()
         
     def do_POST(self):
         time.sleep(1)
-        # Doesn't do anything with posted data
+        # Doesn't do anything with posted data        
         self._set_headers_ok()
-        self.wfile.write("{ \"acknolowedged\": true }")
+        length = int(self.headers.get('content-length'))
+        contenttype = self.headers.get('content-type')
+        postdata = self.rfile.read(length).decode('utf-8')
+        print('----------------------------------')
+        if (re.match(r'application/json',contenttype)):
+            print('** JSON POST data received: ')
+            print(json.dumps(json.loads(postdata), sort_keys=True, indent=4))
+        else:
+            print('** POST data received: ' + postdata)
+        print('----------------------------------')
+        self.wfile.write(bytes("{ \"acknolowedged\": true }".encode('utf-8')))
 
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)

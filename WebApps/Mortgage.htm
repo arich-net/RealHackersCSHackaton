@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="scripts/login.js"></script>
+    <style>
+    h2 {
+        color: #008CBA;
+    }
+    </style>
+    <script>
+        /* Generate DataSet using REST  */
+        var accessToken = "";
+        window.onload = function () {
+          accessToken = verifySessionToken();
+          if (accessToken == false) {
+            window.location.replace("Login.htm");
+          }
+          else {
+            setUserInterface();
+          }
+        };
+
+        function getMortgagesbyBank(bankid, callback) {
+            console.log("Get Mortages for the Bank ID: " + bankid);
+            var xhr = new XMLHttpRequest();
+            //var url = "http://localhost:3000/api/queries/selectBankStatusAll";            
+            var getparams = encodeURIComponent("bank=resource:org.real.hackers.Bank#" + bankid);
+            var url = "https://blockchain.arich-net.com/api/queries/selectMortgagebyBank?" + getparams;
+            var urlloc = "json/selectMortgagebyBank.json?" + getparams;
+
+            console.log("URL " + url);
+            console.log("URL2 " + urlloc);
+
+            if (accessToken != "local") {
+                xhr.open("GET", url, true);
+            } else {
+                console.log("Running in simulation mode");
+                xhr.open("GET", urlloc, true);
+            }
+
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            xhr.setRequestHeader('X-Access-Token', accessToken);
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var mortgages = JSON.parse(this.responseText);
+                    callback(createData(mortgages));
+                }
+            };
+            xhr.send();
+        }
+
+        function createData(mortages) {
+            var results = new Array();
+            for (i in mortages) {
+                var mdata = new Array;
+                $.each(mortages[i], function(k,v) {
+                    if (k != "$class") {
+                        //console.log("Key:" + k + " | Value:" + v);
+                        mdata.push(v);
+                    }
+                });
+                results.push(mdata);
+            }
+            return results;
+        }
+
+        function setUserInterface() {
+            var c_userdata = JSON.parse(getCookie("rh_userdata"));
+            var pivot = c_userdata.bank.match(/.*#(.*)/);
+            var bankid = pivot[1];
+            var dataSet = getMortgagesbyBank(bankid, function(dataSet){
+                //console.log("[[" + dataSet.join("],\n[") + "]]");
+                $('#example').DataTable({
+                    data: dataSet,
+                    columns: [
+                        { title: "MortageID" },
+                        { title: "Duration" },
+                        { title: "Funding Amount" },
+                        { title: "Schedule" },
+                        { title: "ApplicationID" },
+                        { title: "BankID" }
+                    ]
+                });
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <h2>Mortgage View</h2>
+    <table id="example" class="display" width="100%"></table>
+</body>
+</html>

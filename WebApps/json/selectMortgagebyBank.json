@@ -1,0 +1,20 @@
+[
+    {
+      "$class": "org.real.hackers.MortgageContract",
+      "mortgageId": "app0001bankid0001",
+      "duration": 1,
+      "fundingAmount": 30000,
+      "paymentSchedule": "Monthly",
+      "application": "resource:org.real.hackers.Application#app0001",
+      "bank": "resource:org.real.hackers.Bank#bankid0001"
+    },
+    {
+        "$class": "org.real.hackers.MortgageContract",
+        "mortgageId": "app0002bankid0002",
+        "duration": 1,
+        "fundingAmount": 1500000,
+        "paymentSchedule": "Monthly",
+        "application": "resource:org.real.hackers.Application#app0002",
+        "bank": "resource:org.real.hackers.Bank#bankid0002"
+      }
+  ]
