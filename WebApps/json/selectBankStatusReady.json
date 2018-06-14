@@ -1,61 +1,73 @@
 [
-    {
-      "$class": "org.real.hackers.Application",
-      "appId": "app-O1528055685330",
-      "customer": "resource:org.real.hackers.Customer#O1528055685330",
-      "creditHistory": "none",
-      "propertyName": "Zurich Uetlihof 256",
-      "fundingRequest": 600000,
-      "duration": 1,
-      "signatures": [],
-      "applicationStatus": 0
-    },
-    {
-      "$class": "org.real.hackers.Application",
-      "appId": "app-X1527334948066",
-      "customer": "resource:org.real.hackers.Customer#X1527334948066",
-      "creditHistory": "none",
-      "propertyName": "Banhof Zurich",
-      "fundingRequest": 4500000,
-      "duration": 1,
-      "signatures": [
-        {
-          "$class": "org.real.hackers.Signature",
-          "theDate": "2018-03-16T20:29:08.310Z",
-          "name": "Bank Real de Mallorca",
-          "handwriting": "yuyuyusa212gsjab676"
-        }
-      ],
-      "applicationStatus": 0
-    },
-    {
-        "$class": "org.real.hackers.Application",
-        "appId": "app-X1527334948066",
-        "customer": "resource:org.real.hackers.Customer#X1527332786066",
-        "creditHistory": "none",
-        "propertyName": "Löwenstrasse 20",
-        "fundingRequest": 14500000,
-        "duration": 1,
-        "signatures": [
-          {
-            "$class": "org.real.hackers.Signature",
-            "theDate": "2018-03-16T20:29:08.310Z",
-            "name": "Bank Real de Mallorca",
-            "handwriting": "yuyuyusa212gsjab676"
-          },
-          {
-            "$class": "org.real.hackers.Signature",
-            "theDate": "2018-03-16T20:29:08.310Z",
-            "name": "Bank Real de Mallorca",
-            "handwriting": "yuyuyusa212gsjab676"
-          },
-          {
-            "$class": "org.real.hackers.Signature",
-            "theDate": "2018-03-16T20:29:08.310Z",
-            "name": "Bank Real de Mallorca",
-            "handwriting": "yuyuyusa212gsjab676"
-          }
-        ],
-        "applicationStatus": 3
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-P1528919086678",
+    "creditHistory": "none",
+    "propertyName": "Rifertstrasse 22, 8134, Adliswil, Zürich, CHE",
+    "fundingRequest": 1400000,
+    "duration": 1,
+    "latitude": 47.309762536211046,
+    "longitude": 8.534236573547254,
+    "signatures": [],
+    "applicationStatus": 0,
+    "customer": "resource:org.real.hackers.Customer#P1528919086678"
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-R1528919433204",
+    "creditHistory": "none",
+    "propertyName": "Uetlibergstrasse 22, 8045, Zürich, CHE",
+    "fundingRequest": 790000,
+    "duration": 1,
+    "latitude": 47.36462952123605,
+    "longitude": 8.521019969732926,
+    "signatures": [
+      {
+        "$class": "org.real.hackers.Signature",
+        "theDate": "2018-03-16T20:29:08.310Z",
+        "name": "Bank Real de Mallorca",
+        "handwriting": "yuyuyusa212gsjab676"
+      },
+      {
+        "$class": "org.real.hackers.Signature",
+        "theDate": "2018-03-16T20:29:08.310Z",
+        "name": "Bank Real de Mallorca",
+        "handwriting": "yuyuyusa212gsjab676"
       }
-  ]
+    ],
+    "applicationStatus": 0,
+    "customer": "resource:org.real.hackers.Customer#R1528919433204"
+  },
+  {
+    "$class": "org.real.hackers.Application",
+    "appId": "app-Z1528972234100",
+    "creditHistory": "none",
+    "propertyName": "Kalandergasse, 8045, Zürich, CHE",
+    "fundingRequest": 1500000,
+    "duration": 1,
+    "latitude": 47.358544500000015,
+    "longitude": 8.523108000000013,
+    "signatures": [
+      {
+        "$class": "org.real.hackers.Signature",
+        "theDate": "2018-03-16T20:29:08.310Z",
+        "name": "Bank Real de Mallorca",
+        "handwriting": "yuyuyusa212gsjab676"
+      },
+      {
+        "$class": "org.real.hackers.Signature",
+        "theDate": "2018-03-16T20:29:08.310Z",
+        "name": "Bank Real de Mallorca",
+        "handwriting": "yuyuyusa212gsjab676"
+      },
+      {
+        "$class": "org.real.hackers.Signature",
+        "theDate": "2018-03-16T20:29:08.310Z",
+        "name": "Bank Real de Mallorca",
+        "handwriting": "yuyuyusa212gsjab676"
+      }
+    ],
+    "applicationStatus": 3,
+    "customer": "resource:org.real.hackers.Customer#Z1528972234100"
+  }
+]
