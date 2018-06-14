@@ -10,10 +10,10 @@ function createMap() {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
         id: 'mapbox.streets'
-      }).addTo(rhMap);
+    }).addTo(rhMap);
     rhMap.setView([47.35668, 8.51476], 13);
     return rhMap;
 }
@@ -28,10 +28,6 @@ function calcHeight() {
     }
 }
 
-function random(min_val, max_val) {
-    return Math.random() * (max_val - min_val) + min_val;
-}
-
 function addToMap(jsonObject, map) {
     var myStyle = {
         "color": "#ff7800",
@@ -41,7 +37,7 @@ function addToMap(jsonObject, map) {
     var layer = L.geoJSON(createGeoJson(jsonObject), {
         style: myStyle,
         onEachFeature: function (feature, layer) {
-            layer.bindPopup('<h2>' + feature.properties.PropertyDescription + '</h2><p>Id: ' + feature.properties.appId + '<br>Funding request: ' + feature.properties.fundingRequest + '</p>');
+            layer.bindPopup('<h4>' + feature.properties.PropertyDescription + '</h4><p>Id: ' + feature.properties.appId + '<br>Funding request: ' + feature.properties.fundingRequest + '</p>');
         }
     });
     layer.addTo(map);
@@ -60,7 +56,7 @@ function createGeoJson(jsonObject) {
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [random(5.8358140, 10.9793118), random(45.65916894, 47.869910020)]
+                "coordinates": [this.longitude, this.latitude]
             }
         };
         geoJson.push(feature)
@@ -68,8 +64,32 @@ function createGeoJson(jsonObject) {
     return geoJson;
 }
 
+function sendValidation(appId, company, handwriting) {
+    var xhr2 = new XMLHttpRequest();
+    var url = "https://blockchain.arich-net.com/api/Validation";
+    xhr2.open("POST", url, true);
+    xhr2.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr2.setRequestHeader('X-Access-Token', accessToken);
+    validation = {
+        "$class": "org.real.hackers.Validation",
+        "application": "org.real.hackers.Application#" + appId,
+        "signature": {
+            "$class": "org.real.hackers.Signature",
+            "theDate": "2018-03-16T20:29:08.310Z",
+            "name": company,
+            "handwriting": handwriting
+        }
+    }
+    xhr2.send(JSON.stringify(validation));
+    xhr2.onloadend = function () {
+        document.getElementById("loadAnimation").style = "display:none;";
+        setUserInterface();
+    };
+}
+
 var sessionToken = false;
 var csMap;
+var appId;
 var csTable;
 window.onload = function () {
     sessionToken = verifySessionToken();
@@ -79,17 +99,16 @@ window.onload = function () {
 };
 
 $(document).ready(function () {
-    
-    var status = function ( data, type, row ) {
-        if ( type === 'display' ) {
+
+    var status = function (data, type, row) {
+        if (type === 'display') {
             var text = '<i class="fa fa-circle"/> [' + data + ']</p>'
-            if (data == 3) return '<p class="text-success">' + text; 
-            if (data > 1) return '<p class="text-warning">' + text; 
-            return '<p class="text-secondary">' + text; 
+            if (data == 3) return '<p class="text-success">' + text;
+            if (data > 1) return '<p class="text-warning">' + text;
+            return '<p class="text-secondary">' + text;
         }
         return data;
     };
-
 
     var csTable = $('#detailData').DataTable({
         "processing": true,
@@ -108,34 +127,34 @@ $(document).ready(function () {
             { "data": 'customer' },
             { "data": 'propertyName' },
             { "data": 'fundingRequest' },
-            { "data": 'applicationStatus', 'render': status},
+            { "data": 'applicationStatus', 'render': status },
             { "data": '' },
-            { "data": '' }, //"defaultContent": random(5.8358140, 10.9793118)},
-            { "data": '' }
+            { "data": 'longitude' },
+            { "data": 'latitude' }
         ],
         "columnDefs": [{
             "orderable": false,
             "targets": -3,
             "defaultContent": '<button type="button" class="btn btn-secondary btn-sm">Sign</button>'
-        }, {
-            "targets": -2,
-            "data": null,
-            "visible": false,
-            "defaultContent": random(5.8358140, 10.9793118)
         },
         {
-            "targets": -1,
-            "data": null,
+            "targets": [-2, -1],
             "visible": false,
-            "defaultContent": random(45.65916894, 47.869910020)
-        }
-        ]
+            "searchable": false
+        }]
     });
 
     $('#detailData tbody').on('click', 'button', function () {
         var row = csTable.row($(this).parents('tr')).data();
+        appId = row.appId;
         $('#signModal').modal('show');
-        console.log(row);
+    });
+
+    $('#signBtn').on('click', function (evt) {
+        console.log(appId);
+        console.log($('#bank').val());
+        console.log($('#bank-dep').val());
+        console.log($('#bank-name').val());
     });
 
     $(window).resize(function () {
@@ -154,4 +173,5 @@ $(document).ready(function () {
         calcHeight();
         addToMap(json, csMap)
     }
+
 });
